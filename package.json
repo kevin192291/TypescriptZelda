@@ -25,6 +25,7 @@
     "electron"
   ],
   "dependencies": {
+    "@excaliburjs/excalibur-tiled": "^2.3.0",
     "electron-debug": "1.0.0",
     "excalibur": "0.14.0"
   },
