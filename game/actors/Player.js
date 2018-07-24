@@ -44,7 +44,14 @@ var Player = (function (_super) {
         else if (engine.input.keyboard.isHeld(ex.Input.Keys.D) || engine.input.keyboard.isHeld(ex.Input.Keys.Right)) {
             this.vel.setTo(100, 0);
         }
-        else {
+        if (engine.input.keyboard.wasReleased(ex.Input.Keys.W) ||
+            engine.input.keyboard.wasReleased(ex.Input.Keys.S) ||
+            engine.input.keyboard.wasReleased(ex.Input.Keys.A) ||
+            engine.input.keyboard.wasReleased(ex.Input.Keys.D) ||
+            engine.input.keyboard.wasReleased(ex.Input.Keys.Up) ||
+            engine.input.keyboard.wasReleased(ex.Input.Keys.Down) ||
+            engine.input.keyboard.wasReleased(ex.Input.Keys.Right) ||
+            engine.input.keyboard.wasReleased(ex.Input.Keys.Left)) {
             this.vel.setTo(0, 0);
         }
     };
