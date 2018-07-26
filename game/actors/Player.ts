@@ -1,4 +1,3 @@
-
 import ex = require("../../node_modules/excalibur");
 import { PreCollisionEvent, Scene, Actor, Engine } from "../../node_modules/excalibur";
 

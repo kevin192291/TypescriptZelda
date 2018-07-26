@@ -3,6 +3,11 @@
         "target": "es5",
         "moduleResolution": "node",
         "module": "commonjs",
-        "sourceMap": true
-    }
+        "sourceMap": true,
+        "outDir": "./../dist"
+    },
+    "files": [
+        "./index.ts",
+        "./actors/Player.ts"
+    ]
 }
