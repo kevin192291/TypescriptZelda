@@ -1,24 +1,31 @@
-import ex = require("../../node_modules/excalibur");
-import { PreCollisionEvent, Scene, Actor, Engine } from "../../node_modules/excalibur";
+import * as ex from 'excalibur';
+import {
+    PreCollisionEvent,
+    Scene,
+    Actor,
+    Engine
+} from "excalibur";
 
 export class Player extends ex.Actor {
     private health: number = 100;
+    public name: string = 'unknown';
 
-    constructor(scene: Scene) {
+    constructor(scene: Scene, name?: string) {
         super();
-        this.collisionType = ex.CollisionType.Passive;
+        this.collisionType = ex.CollisionType.Active;
         this.body.useBoxCollision();
 
         this.on('precollision', (e: PreCollisionEvent) => {
-            debugger;
             const withActor: Actor = e.actor;
-            this.pos.setTo(this.oldPos.x, this.oldPos.y);
+            console.log(`${this.name} collided with ${withActor}`);
+            
         });
 
         this.color = ex.Color.Green;
         this.setHeight(20);
         this.setWidth(20);
         this.pos.setTo(200, 250);
+        this.name = name;
 
         scene.add(this);
     }

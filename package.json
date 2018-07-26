@@ -25,10 +25,10 @@
     "electron"
   ],
   "dependencies": {
+    "excalibur": "0.14.0",
     "@excaliburjs/excalibur-tiled": "^2.3.0",
     "electron-debug": "1.0.0",
-    "electron-prebuilt": "^1.4.13",
-    "excalibur": "0.14.0"
+    "electron-prebuilt": "^1.4.13"
   },
   "devDependencies": {
     "devtron": "1.4.0",
