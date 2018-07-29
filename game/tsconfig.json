@@ -1,11 +1,14 @@
 {
     "compilerOptions": {
-        "target": "es5",
+        "target": "es2017",
         "moduleResolution": "node",
         "module": "commonjs",
         "sourceMap": true,
         "outDir": "./../dist"
-    }
-    
+    },
+    "include": [
+        "**/*.*",
+        "maps/*.json"
+    ]
     
 }

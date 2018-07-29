@@ -22,8 +22,8 @@ export class Player extends ex.Actor {
         });
 
         this.color = ex.Color.Green;
-        this.setHeight(20);
-        this.setWidth(20);
+        this.setHeight(10);
+        this.setWidth(10);
         this.pos.setTo(200, 250);
         this.name = name;
 
