@@ -9,6 +9,7 @@ import {
 } from 'excalibur';
 import { ITiledMap, ITiledTileSet } from './ITiledMap';
 import * as pako from 'pako';
+import { TileProperties } from './mapProperties';
 
 export enum TiledMapFormat {
 
@@ -163,18 +164,13 @@ export default class TiledResource extends Resource<ITiledMap> {
                     let gid = <number>layer.data[i];
                     if (gid !== 0) {
                         var ts = this.getTilesetForTile(gid);
-                        if (ts.tileproperties[gid]) {
-                            let isSolid = ts.tileproperties[gid]['solid'];
-                            if(isSolid === 'true') {
-                                map.data[i].solid = true;
-                            } else if (isSolid === 'false') {
-                                map.data[i].solid = false;
-                            } else {
-                                map.data[i].solid = false;
-                            }
+                        if (ts.tileproperties[gid] && ts.tileproperties[gid]['solid'] === 'true') {
+                            map.data[i].solid = true;
+                        } else {
+                            map.data[i].solid = false;
                         }
+                        map.data[i].sprites.push(new TileSprite(ts.firstgid.toString(), gid - ts.firstgid));
 
-                        map.data[i].sprites.push(new TileSprite(ts.firstgid.toString(), gid - ts.firstgid))
                     }
                 }
             }

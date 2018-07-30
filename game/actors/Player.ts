@@ -3,22 +3,22 @@ import {
     PreCollisionEvent,
     Scene,
     Actor,
-    Engine
+    Engine,
+    TileMap
 } from "excalibur";
 
 export class Player extends ex.Actor {
     private health: number = 100;
     public name: string = 'unknown';
 
-    constructor(scene: Scene, name?: string) {
+    constructor(game: Engine, name?: string) {
         super();
         this.collisionType = ex.CollisionType.Active;
         this.body.useBoxCollision();
 
         this.on('precollision', (e: PreCollisionEvent) => {
-            const withActor: Actor = e.actor;
-            console.log(`${this.name} collided with ${withActor}`);
-            
+            debugger;
+            console.log(`${e}`);
         });
 
         this.color = ex.Color.Green;
@@ -27,7 +27,7 @@ export class Player extends ex.Actor {
         this.pos.setTo(200, 250);
         this.name = name;
 
-        scene.add(this);
+        game.add(this);
     }
 
     public update(engine: Engine, delta) {

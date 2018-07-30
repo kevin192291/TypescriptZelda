@@ -11,23 +11,18 @@ ex.Physics.collisionResolutionStrategy = CollisionResolutionStrategy.Box;
 var map = new TiledResource('dist/assets/zelda.json');
 var loader = new ex.Loader([map]);
 
-var scene = new ex.Scene(game);
-
-new Player(scene, "kevin");
-
-game.addScene('scene', scene);
-game.goToScene('scene');
 game.start(loader).then((success: any) => {
     map.data.tilesets.forEach(tileset => {
         console.log(tileset.image, tileset.imageTexture.isLoaded());
     });
-
-    // get a Excalibur `TileMap` instance
-    var tm = map.getTileMap();
-    tm.x = 0;
-    tm.y = 0;
     
+    // get a Excalibur `TileMap` instance
+    var tilemap = map.getTileMap();
+    tilemap.x = 0;
+    tilemap.y = 0;
+    
+    new Player(game, tilemap, "kevin");
 
     // draw the tile map
-    game.add(tm);
+    game.add(tilemap);
 });
