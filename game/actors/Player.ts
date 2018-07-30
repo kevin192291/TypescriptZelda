@@ -1,10 +1,7 @@
 import * as ex from 'excalibur';
 import {
     PreCollisionEvent,
-    Scene,
-    Actor,
     Engine,
-    TileMap
 } from "excalibur";
 
 export class Player extends ex.Actor {

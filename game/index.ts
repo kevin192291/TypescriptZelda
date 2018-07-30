@@ -1,6 +1,5 @@
 import * as ex from 'excalibur';
 import { Player } from './actors/Player';
-import { Npc } from './actors/Npc';
 import { CollisionResolutionStrategy } from 'excalibur';
 import TiledResource from './maps/TiledResource';
 
@@ -21,7 +20,7 @@ game.start(loader).then((success: any) => {
     tilemap.x = 0;
     tilemap.y = 0;
     
-    new Player(game, tilemap, "kevin");
+    new Player(game, "kevin");
 
     // draw the tile map
     game.add(tilemap);
