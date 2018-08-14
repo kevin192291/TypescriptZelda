@@ -21,7 +21,6 @@ game.start(loader).then((success: any) => {
     });
 
     game.goToScene('zelda.json');
-    debugger;
     Player.create(game, game.currentScene, "kevin");
 });
 
