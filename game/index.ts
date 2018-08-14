@@ -1,19 +1,20 @@
 import * as ex from 'excalibur';
+import { CollisionResolutionStrategy } from 'excalibur';
+
 import { Player } from './actors/Player';
-import { CollisionResolutionStrategy, Scene } from 'excalibur';
 import TiledResource from './maps/TiledResource';
 
-var game = new ex.Engine({ displayMode: ex.DisplayMode.FullScreen });
+const game: ex.Engine = new ex.Engine({ displayMode: ex.DisplayMode.FullScreen });
 ex.Physics.enabled = true;
 ex.Physics.collisionResolutionStrategy = CollisionResolutionStrategy.Box;
 
 
-var map = LoadAllMaps();
-var loader = new ex.Loader(map);
+const map: TiledResource[] = LoadAllMaps();
+const loader: ex.Loader = new ex.Loader(map);
 
-game.start(loader).then((success: any) => {
+game.start(loader).then(() => {
     map.forEach(map => {
-        let scene = new ex.Scene(game);
+        const scene = new ex.Scene(game);
         scene.addTileMap(map.getTileMap());
         game.addScene(map.name, scene);
     });
@@ -22,8 +23,8 @@ game.start(loader).then((success: any) => {
     Player.create(game, game.currentScene, "kevin");
 });
 
-function LoadAllMaps() {
-    let maps = [];
+function LoadAllMaps(): TiledResource[] {
+    const maps: TiledResource[] = [];
     const testFolder = './dist/assets/';
     const fs = require('fs');
     fs.readdirSync(testFolder).forEach((file: string) => {

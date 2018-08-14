@@ -1,10 +1,4 @@
-import * as ex from 'excalibur';
-import {
-    PreCollisionEvent,
-    Scene,
-    Actor,
-    Engine
-} from "excalibur";
+import { Scene } from "excalibur";
 import { Character } from './Character';
 
 export class Npc extends Character {

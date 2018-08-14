@@ -1,4 +1,3 @@
-import { Npc } from './Npc';
 import * as ex from 'excalibur';
 import {
     PreCollisionEvent,

@@ -1,6 +1,5 @@
 import * as ex from 'excalibur';
 import {
-    PreCollisionEvent,
     Engine,
     Scene,
 } from "excalibur";
