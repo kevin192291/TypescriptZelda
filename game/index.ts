@@ -8,35 +8,35 @@ ex.Physics.enabled = true;
 ex.Physics.collisionResolutionStrategy = CollisionResolutionStrategy.Box;
 
 
-var map = LoadAllMaps(); //new TiledResource('dist/assets/zelda.json');
+var map = LoadAllMaps(); // [new TiledResource('dist/assets/zelda.json')];
 var loader = new ex.Loader(map);
-var currentScene: Scene = new ex.Scene(game);
+var scenes: Scene[] = []; // = new ex.Scene(game);
 
 game.start(loader).then((success: any) => {
-    var tilemap = map[0].getTileMap();
+    map.forEach(map => {
+        let scene = new ex.Scene(game);
+        scene.addTileMap(map.getTileMap());
+        scenes.push(scene);
+        game.addScene(map.name, scene);
+    });
 
-    currentScene.addTileMap(tilemap);
-    Player.create(game, currentScene, "kevin");
-
-    // draw the tile map
-    game.addScene('overworld', currentScene);
-    game.goToScene('overworld');
+    game.goToScene('zelda.json');
+    debugger;
+    Player.create(game, game.currentScene, "kevin");
 });
 
 function LoadAllMaps() {
     let maps = [];
-    debugger;
-
-    const testFolder = './dist/assets';
+    const testFolder = './dist/assets/';
     const fs = require('fs');
-
     fs.readdirSync(testFolder).forEach((file: string) => {
         debugger;
         if (file.includes('.json')) {
             console.log(file);
-            maps.push(new TiledResource(file));
+            let mapObj = new TiledResource(testFolder + file);
+            mapObj.name = file;
+            maps.push(mapObj);
         }
-
     })
     return maps;
 }

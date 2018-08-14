@@ -5,6 +5,7 @@
  * when loading resources via Resource loader.
  */
 export interface ITiledMap {
+    name: string;
     width: number;
     height: number;
     layers: ITiledMapLayer[];

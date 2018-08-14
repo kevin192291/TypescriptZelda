@@ -31,6 +31,7 @@ export default class TiledResource extends Resource<ITiledMap> {
 
     public imagePathAccessor: (path: string, ts: ITiledTileSet) => string;
     public externalTilesetPathAccessor: (path: string, ts: ITiledTileSet) => string;
+    public name: string;
 
     constructor(path: string, mapFormat = TiledMapFormat.JSON) {
         switch (mapFormat) {
