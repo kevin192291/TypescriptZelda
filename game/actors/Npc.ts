@@ -2,31 +2,19 @@ import * as ex from 'excalibur';
 import {
     PreCollisionEvent,
     Scene,
-    Actor
+    Actor,
+    Engine
 } from "excalibur";
+import { Character } from './Character';
 
-export class Npc extends ex.Actor {
-    private health: number = 100;
+export class Npc extends Character {
     public name: string = 'unknown';
 
-    constructor(scene: Scene, name?: string) {
-        super();
+    constructor(engine: Scene, name?: string) {
+        super(engine, name);
+    }
 
-        this.on('precollision', (e: PreCollisionEvent) => {
-            const withActor: Actor = e.actor;
-            console.log(`${this.name} collided with ${withActor[name]}`);
-            
-        });
-
-        this.color = ex.Color.Red;
-        this.setHeight(20);
-        this.setWidth(20);
-        this.pos.setTo(30, 50);
-        this.name = name;
-
-        this.collisionType = ex.CollisionType.Active;
-        this.body.useBoxCollision();
-        scene.add(this);
+    public walk() {
 
     }
 

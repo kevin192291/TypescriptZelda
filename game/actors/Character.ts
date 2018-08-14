@@ -1,20 +1,23 @@
+import { Npc } from './Npc';
 import * as ex from 'excalibur';
 import {
     PreCollisionEvent,
     Engine,
+    Scene,
 } from "excalibur";
 
 export abstract class Character extends ex.Actor {
-    private health: number = 100;
     public name: string = 'unknown';
+    public health: number = 100;
+    public abstract walk(scene?: Scene, engine?: Engine, x?: number, y?: number, toCharacter?: Character);
 
-    constructor(game: Engine, name?: string) {
+    constructor(scene: Scene, name?: string) {
         super();
         this.collisionType = ex.CollisionType.Active;
         this.body.useBoxCollision();
 
         this.on('precollision', (e: PreCollisionEvent) => {
-            debugger;
+            //debugger;
             console.log(`${e}`);
         });
 
@@ -23,7 +26,7 @@ export abstract class Character extends ex.Actor {
         this.setWidth(16);
         this.pos.setTo(200, 250);
         this.name = name;
-        game.add(this);
+        scene.add(this);
     }
 
     public assignSprite(spriteFile: string) {

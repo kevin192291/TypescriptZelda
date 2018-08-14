@@ -2,34 +2,35 @@ import * as ex from 'excalibur';
 import {
     PreCollisionEvent,
     Engine,
+    Scene,
 } from "excalibur";
+import { Character } from './Character';
 
-export class Player extends ex.Actor {
-    private health: number = 100;
-    public name: string = 'unknown';
+export class Player extends Character {
+    public static instance: Player = null;
 
-    constructor(game: Engine, name?: string) {
-        super();
-        this.collisionType = ex.CollisionType.Active;
-        this.body.useBoxCollision();
+    private constructor(game: Engine, scene: Scene, name?: string) {
+        super(scene, name);
+    }
 
-        this.on('precollision', (e: PreCollisionEvent) => {
-            debugger;
-            console.log(`${e}`);
-        });
-
-        this.color = ex.Color.Green;
-        this.setHeight(10);
-        this.setWidth(10);
-        this.pos.setTo(200, 250);
-        this.name = name;
-
-        game.add(this);
+    public static create(game: Engine, scene: Scene, name?: string) {
+        if(this.instance === null) {
+            this.instance = new Player(game, scene, name);
+        }
+        return this.instance;
     }
 
     public update(engine: Engine, delta) {
         super.update(engine, delta);
+        this.walk(engine);
+    }
 
+    public _initialize(engine: Engine) {
+        super._initialize(engine);
+        
+    }
+
+    public walk(engine) {
         if (engine.input.keyboard.isHeld(ex.Input.Keys.W) || engine.input.keyboard.isHeld(ex.Input.Keys.Up)) {
             this.vel.setTo(0, -100);
         } else if (engine.input.keyboard.isHeld(ex.Input.Keys.S) || engine.input.keyboard.isHeld(ex.Input.Keys.Down)) {
@@ -52,9 +53,4 @@ export class Player extends ex.Actor {
             this.vel.setTo(0, 0);
         }
     }
-
-    public _initialize(engine: Engine) {
-        super._initialize(engine);
-    }
-
 }

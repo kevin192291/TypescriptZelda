@@ -1,27 +1,42 @@
 import * as ex from 'excalibur';
 import { Player } from './actors/Player';
-import { CollisionResolutionStrategy } from 'excalibur';
+import { CollisionResolutionStrategy, Scene } from 'excalibur';
 import TiledResource from './maps/TiledResource';
 
 var game = new ex.Engine({ displayMode: ex.DisplayMode.FullScreen });
 ex.Physics.enabled = true;
 ex.Physics.collisionResolutionStrategy = CollisionResolutionStrategy.Box;
 
-var map = new TiledResource('dist/assets/zelda.json');
-var loader = new ex.Loader([map]);
+
+var map = LoadAllMaps(); //new TiledResource('dist/assets/zelda.json');
+var loader = new ex.Loader(map);
+var currentScene: Scene = new ex.Scene(game);
 
 game.start(loader).then((success: any) => {
-    map.data.tilesets.forEach(tileset => {
-        console.log(tileset.image, tileset.imageTexture.isLoaded());
-    });
-    
-    // get a Excalibur `TileMap` instance
-    var tilemap = map.getTileMap();
-    tilemap.x = 0;
-    tilemap.y = 0;
-    
-    new Player(game, "kevin");
+    var tilemap = map[0].getTileMap();
+
+    currentScene.addTileMap(tilemap);
+    Player.create(game, currentScene, "kevin");
 
     // draw the tile map
-    game.add(tilemap);
+    game.addScene('overworld', currentScene);
+    game.goToScene('overworld');
 });
+
+function LoadAllMaps() {
+    let maps = [];
+    debugger;
+
+    const testFolder = './dist/assets';
+    const fs = require('fs');
+
+    fs.readdirSync(testFolder).forEach((file: string) => {
+        debugger;
+        if (file.includes('.json')) {
+            console.log(file);
+            maps.push(new TiledResource(file));
+        }
+
+    })
+    return maps;
+}
