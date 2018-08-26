@@ -29,9 +29,11 @@
     "electron-debug": "1.0.0",
     "electron-prebuilt": "^1.4.13",
     "excalibur": "0.14.0",
-    "pako": "^1.0.6"
+    "pako": "^1.0.6",
+    "require": "^2.4.20"
   },
   "devDependencies": {
+    "@types/node": "^10.9.2",
     "devtron": "1.4.0",
     "electron": "1.6.8",
     "electron-packager": "8.7.0",
