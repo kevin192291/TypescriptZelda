@@ -40,9 +40,8 @@ function LoadAllMaps(): TiledResource[] {
 }
 
 function LoadWeather() {
-    debugger;
     let weatherService = new WeatherService();
-    weatherService.getAll().then(weather => {
+    weatherService.getWeather().then(t => {
         debugger;
     });
 }
