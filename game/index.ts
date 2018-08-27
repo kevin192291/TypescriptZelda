@@ -3,6 +3,7 @@ import { CollisionResolutionStrategy } from 'excalibur';
 
 import { Player } from './actors/Player';
 import TiledResource from './maps/TiledResource';
+import { WeatherService } from './internet/weather/weatherService';
 
 const game: ex.Engine = new ex.Engine({ displayMode: ex.DisplayMode.FullScreen });
 ex.Physics.enabled = true;
@@ -11,6 +12,7 @@ ex.Physics.collisionResolutionStrategy = CollisionResolutionStrategy.Box;
 
 const map: TiledResource[] = LoadAllMaps();
 const loader: ex.Loader = new ex.Loader(map);
+LoadWeather();
 
 game.start(loader).then(() => {
     map.forEach(map => {
@@ -35,4 +37,12 @@ function LoadAllMaps(): TiledResource[] {
         }
     })
     return maps;
+}
+
+function LoadWeather() {
+    debugger;
+    let weatherService = new WeatherService();
+    weatherService.getAll().then(weather => {
+        debugger;
+    });
 }

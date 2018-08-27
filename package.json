@@ -30,7 +30,9 @@
     "electron-prebuilt": "^1.4.13",
     "excalibur": "0.14.0",
     "pako": "^1.0.6",
-    "require": "^2.4.20"
+    "require": "^2.4.20",
+    "typed-rest-client": "^1.0.9",
+    "web-request": "^1.0.7"
   },
   "devDependencies": {
     "@types/node": "^10.9.2",
