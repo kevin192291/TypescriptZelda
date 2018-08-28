@@ -13,6 +13,7 @@ ex.Physics.collisionResolutionStrategy = CollisionResolutionStrategy.Box;
 var resources: IResources = {
     maps: [],
     sprites: [],
+    spriteSheets: [],
 };
 
 LoadAllMaps();
@@ -21,24 +22,30 @@ LoadWeather();
 
 
 game.start(loader).then(() => {
-    for(let map in resources.maps) {
-        debugger;
+    for (let map in resources.maps) {
         const scene = new ex.Scene(game);
         scene.addTileMap(resources.maps[map].getTileMap());
         game.addScene(map, scene);
+    }
+    for (let sheet in resources.sprites) {
+        debugger;
+        resources.spriteSheets[sheet] = new ex.SpriteSheet(resources.sprites[sheet], 13, 13, 16, 16);
     }
 
 
     game.goToScene('zelda');
     var plr = Player.create(game, game.currentScene, "kevin");
 
-    plr.addDrawing('link', resources.sprites['LinkSheet'].asSprite());
+    //plr.addDrawing('link', resources.sprites['LinkSheet'].asSprite());
+
+    var left_sprites = resources.spriteSheets['LinkSheet'].getAnimationBetween(game, 1, 11, 50).sprites;
+    var left = new ex.Animation(game, left_sprites, 125, true);
 
     // var playerSprite = new ex.SpriteSheet(resources.sprites['LinkSheet'], 13, 13, 208, 208);
     // var playerIdleAnimation = playerSprite.getSprite(1);
-    // plr.addDrawing('idle', playerIdleAnimation);
-    // plr.setDrawing('idle');
-    
+     plr.addDrawing('idle', left);
+     plr.setDrawing('idle');
+
 
 });
 
