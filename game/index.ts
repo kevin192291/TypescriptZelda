@@ -13,6 +13,7 @@ ex.Physics.collisionResolutionStrategy = CollisionResolutionStrategy.Box;
 const map: TiledResource[] = LoadAllMaps();
 const loader: ex.Loader = new ex.Loader(map);
 LoadWeather();
+debugger;
 
 game.start(loader).then(() => {
     map.forEach(map => {

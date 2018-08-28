@@ -39,7 +39,6 @@ export class WeatherService extends DataService<IWeather> {
                 lastPoll: this.lastPoll
             }
             localStorage.setItem('weather', JSON.stringify(weatherObject));
-
             return weather;
         })
     }
