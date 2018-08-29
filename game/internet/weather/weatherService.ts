@@ -9,6 +9,7 @@ export class WeatherService extends DataService<IWeather> {
 
     constructor() {
         super(`http://api.openweathermap.org/data/2.5/forecast?id=524901&APPID=${apiKey}`, apiKey);
+        this.setTime();
         const localWeather: string = localStorage.getItem('weather');
         try {
             if (localWeather) {
@@ -43,4 +44,56 @@ export class WeatherService extends DataService<IWeather> {
         })
     }
 
+    private setTime() {
+        var date = new Date();
+        var current_hour = date.getHours();
+        var html = this.getCSSRule('html');
+        //document.styleSheets[0]['rules'][4].style.backgroundColor = 'black';
+        html.style.backgroundColor = 'black';
+
+        debugger;
+        if (current_hour < 4) {
+            html.style.opacity = .7;
+        }
+        if (current_hour == 4) {
+            html.style.opacity = .2;
+        } else if (current_hour == 5) {
+            html.style.opacity = .4;
+        } else if (current_hour == 6) {
+            html.style.opacity = .6;
+        } else if (current_hour == 7) {
+            html.style.opacity = 1;
+        }
+
+        if (current_hour > 18) {
+            html.style.opacity = .7;
+        } else if (current_hour == 19) {
+            html.style.opacity = .6;
+        } else if (current_hour == 20) {
+            html.style.opacity = .5;
+        } else if (current_hour == 21) {
+            html.style.opacity = .4;
+        } else if (current_hour == 22) {
+            html.style.opacity = .3;
+        } else if (current_hour == 23) {
+            html.style.opacity = .2;
+        } else if (current_hour == 24) {
+            html.style.opacity = .1;
+        }
+    }
+
+    private getCSSRule(ruleName) {
+        ruleName = ruleName.toLowerCase();
+        var result = null;
+        var find = Array.prototype.find;
+    
+        find.call(document.styleSheets, styleSheet => {
+            result = find.call(styleSheet.cssRules, cssRule => {
+                return cssRule instanceof CSSStyleRule 
+                    && cssRule.selectorText.toLowerCase() == ruleName;
+            });
+            return result != null;
+        });
+        return result;
+    }
 }

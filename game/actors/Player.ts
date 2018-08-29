@@ -72,12 +72,12 @@ export class Player extends Character {
             this._walkKeyReleased = true;
         } else if (engine.input.keyboard.wasReleased(ex.Input.Keys.A) || engine.input.keyboard.wasReleased(ex.Input.Keys.Right)) {
             this.vel.setTo(0, 0);
-            this.setDrawing('left_idle');
+            this.setDrawing('right_idle');
             this._walkKeyReleased = true;
         } else if (engine.input.keyboard.wasReleased(ex.Input.Keys.D) || engine.input.keyboard.wasReleased(ex.Input.Keys.Left)) {
             this.vel.setTo(0, 0);
-            this.setDrawing('right_idle');
             this._walkKeyReleased = true;
+            this.setDrawing('left_idle');
         }
     }
 
