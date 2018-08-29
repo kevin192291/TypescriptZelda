@@ -16,7 +16,6 @@ export abstract class Character extends ex.Actor {
         this.body.useBoxCollision();
 
         this.on('precollision', (e: PreCollisionEvent) => {
-            //debugger;
             console.log(`${e}`);
         });
 

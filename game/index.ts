@@ -28,23 +28,14 @@ game.start(loader).then(() => {
         game.addScene(map, scene);
     }
     for (let sheet in resources.sprites) {
-        debugger;
         resources.spriteSheets[sheet] = new ex.SpriteSheet(resources.sprites[sheet], 13, 13, 16, 16);
     }
 
 
     game.goToScene('zelda');
-    var plr = Player.create(game, game.currentScene, "kevin");
+    Player.create(game, game.currentScene, resources.spriteSheets['LinkSheet'], "kevin");
 
-    //plr.addDrawing('link', resources.sprites['LinkSheet'].asSprite());
-
-    var left_sprites = resources.spriteSheets['LinkSheet'].getAnimationBetween(game, 1, 11, 50).sprites;
-    var left = new ex.Animation(game, left_sprites, 125, true);
-
-    // var playerSprite = new ex.SpriteSheet(resources.sprites['LinkSheet'], 13, 13, 208, 208);
-    // var playerIdleAnimation = playerSprite.getSprite(1);
-     plr.addDrawing('idle', left);
-     plr.setDrawing('idle');
+    
 
 
 });
