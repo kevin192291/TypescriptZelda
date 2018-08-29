@@ -49,16 +49,18 @@ export class Player extends Character {
             this.setDrawing('right');
         }
 
-        if (engine.input.keyboard.wasReleased(ex.Input.Keys.W) ||
-            engine.input.keyboard.wasReleased(ex.Input.Keys.S) ||
-            engine.input.keyboard.wasReleased(ex.Input.Keys.A) ||
-            engine.input.keyboard.wasReleased(ex.Input.Keys.D) ||
-
-            engine.input.keyboard.wasReleased(ex.Input.Keys.Up) ||
-            engine.input.keyboard.wasReleased(ex.Input.Keys.Down) ||
-            engine.input.keyboard.wasReleased(ex.Input.Keys.Right) ||
-            engine.input.keyboard.wasReleased(ex.Input.Keys.Left)) {
+        if (engine.input.keyboard.wasReleased(ex.Input.Keys.W) || engine.input.keyboard.wasReleased(ex.Input.Keys.Up)) {
             this.vel.setTo(0, 0);
+            this.setDrawing('up_idle');
+        } else if (engine.input.keyboard.wasReleased(ex.Input.Keys.S) || engine.input.keyboard.wasReleased(ex.Input.Keys.Down)) {
+            this.vel.setTo(0, 0);
+            this.setDrawing('down_idle');
+        } else if (engine.input.keyboard.wasReleased(ex.Input.Keys.A) || engine.input.keyboard.wasReleased(ex.Input.Keys.Right)) {
+            this.vel.setTo(0, 0);
+            this.setDrawing('left_idle');
+        } else if (engine.input.keyboard.wasReleased(ex.Input.Keys.D) || engine.input.keyboard.wasReleased(ex.Input.Keys.Left)) {
+            this.vel.setTo(0, 0);
+            this.setDrawing('right_idle');
         }
     }
 
@@ -90,8 +92,5 @@ export class Player extends Character {
         var down_sprites = this._spriteSheet.getAnimationBetween(this._game, 21, 23, 50).sprites;
         var down = new ex.Animation(this._game, down_sprites, 150, true);
         this.addDrawing('down', down);
-
-        
-        this.setDrawing('down_idle');
     }
 }

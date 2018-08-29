@@ -1,5 +1,15 @@
 import * as ex from 'excalibur';
 import { CollisionResolutionStrategy } from 'excalibur';
+const admin = require('firebase-admin');
+
+admin.initializeApp({
+    apiKey: "AIzaSyAyx0wm5NyLsbuSJ8QlWZ6eFei6pfdE3mc",
+    authDomain: "communitygame-1febd.firebaseapp.com",
+    databaseURL: "https://communitygame-1febd.firebaseio.com",
+    projectId: "communitygame-1febd",
+    storageBucket: "",
+    messagingSenderId: "273246580010"
+});
 
 import { Player } from './actors/Player';
 import TiledResource from './maps/TiledResource';
@@ -20,6 +30,8 @@ LoadAllMaps();
 LoadAllSprites();
 LoadWeather();
 
+debugger;
+
 
 game.start(loader).then(() => {
     for (let map in resources.maps) {
@@ -34,10 +46,6 @@ game.start(loader).then(() => {
 
     game.goToScene('zelda');
     Player.create(game, game.currentScene, resources.spriteSheets['LinkSheet'], "kevin");
-
-    
-
-
 });
 
 function LoadAllMaps(): void {
