@@ -10,7 +10,7 @@ export abstract class Character extends ex.Actor {
     public health: number = 100;
     public abstract walk(scene?: Scene, engine?: Engine, x?: number, y?: number, toCharacter?: Character);
 
-    constructor(scene: Scene, name?: string) {
+    constructor(engine: Engine, name?: string) {
         super();
         this.collisionType = ex.CollisionType.Active;
         this.body.useBoxCollision();
@@ -24,7 +24,8 @@ export abstract class Character extends ex.Actor {
         this.setWidth(16);
         this.pos.setTo(200, 250);
         this.name = name;
-        scene.add(this);
+        engine.currentScene.add(this);
+        engine.currentScene.camera.rotation = 45;
     }
 
     public assignSprite(spriteFile: string) {

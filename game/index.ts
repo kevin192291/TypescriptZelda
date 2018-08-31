@@ -1,5 +1,5 @@
 import * as ex from 'excalibur';
-import { CollisionResolutionStrategy } from 'excalibur';
+import { CollisionResolutionStrategy, SideCamera, LockedCamera } from 'excalibur';
 import { Player } from './actors/Player';
 import { LoadAllMaps, LoadAllSprites, LoadWeather, resources, loader } from './initialization';
 
@@ -20,8 +20,10 @@ game.start(loader).then(() => {
     for (let sheet in resources.sprites) {
         resources.spriteSheets[sheet] = new ex.SpriteSheet(resources.sprites[sheet], 13, 13, 16, 16);
     }
-
-
     game.goToScene('zelda');
-    Player.create(game, game.currentScene, resources.spriteSheets['LinkSheet'], "kevin");
+    const plr = Player.create(game, resources.spriteSheets['LinkSheet'], "kevin");
+    
+    const cam = new LockedCamera();
+    cam.setActorToFollow(plr);
+    game.currentScene.camera = cam;
 });

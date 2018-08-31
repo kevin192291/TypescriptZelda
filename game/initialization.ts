@@ -44,8 +44,8 @@ export function LoadAllSprites(): void {
 }
 
 export function LoadWeather() {
-    let weatherService = new WeatherService();
-    weatherService.getWeather().then(t => {
+    // let weatherService = new WeatherService();
+    // weatherService.getWeather().then(t => {
 
-    });
+    // });
 }

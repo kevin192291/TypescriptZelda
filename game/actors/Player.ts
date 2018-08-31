@@ -12,15 +12,15 @@ export class Player extends Character {
     private _game: Engine = null;
     private _walkKeyReleased = true;
 
-    private constructor(game: Engine, scene: Scene, spriteSheet: SpriteSheet, name?: string) {
-        super(scene, name);
+    private constructor(game: Engine, spriteSheet: SpriteSheet, name?: string) {
+        super(game, name);
         this._spriteSheet = spriteSheet;
         this._game = game;
     }
 
-    public static create(game: Engine, scene: Scene, spriteSheet: SpriteSheet, name?: string) {
+    public static create(game: Engine, spriteSheet: SpriteSheet, name?: string) {
         if (this.instance === null) {
-            this.instance = new Player(game, scene, spriteSheet, name);
+            this.instance = new Player(game, spriteSheet, name);
         }
         return this.instance;
     }
