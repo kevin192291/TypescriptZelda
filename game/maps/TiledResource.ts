@@ -33,15 +33,19 @@ export default class TiledResource extends Resource<ITiledMap> {
     public externalTilesetPathAccessor: (path: string, ts: ITiledTileSet) => string;
     public name: string;
 
-    constructor(path: string, mapFormat = TiledMapFormat.JSON) {
-        switch (mapFormat) {
-            case TiledMapFormat.JSON:
-                super(path, "json");
-                break;
-            default:
-                throw 'The format ${mapFormat} is not currently supported. Please export Tiled map as JSON.';
+    constructor(path: string, jsonMap: ITiledMap = null, mapFormat = TiledMapFormat.JSON) {
+        if (jsonMap !== null) {
+            super('', 'json', true);
+            this.data = jsonMap;
+        } else {
+            switch (mapFormat) {
+                case TiledMapFormat.JSON:
+                    super(path, "json", true);
+                    break;
+                default:
+                    throw 'The format ${mapFormat} is not currently supported. Please export Tiled map as JSON.';
+            }
         }
-
         this.mapFormat = mapFormat;
         this.imagePathAccessor = this.externalTilesetPathAccessor = (p, tileset) => {
 
@@ -186,7 +190,7 @@ export default class TiledResource extends Resource<ITiledMap> {
  * Handles parsing of JSON tiled data
  */
 var parseJsonMap = (data: ITiledMap): ITiledMap => {
-debugger;
+    debugger;
     // Decompress layers
     if (data.layers) {
         for (var layer of data.layers) {

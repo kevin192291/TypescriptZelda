@@ -20,7 +20,9 @@ game.start(loader).then(() => {
     for (let sheet in resources.sprites) {
         resources.spriteSheets[sheet] = new ex.SpriteSheet(resources.sprites[sheet], 13, 13, 16, 16);
     }
-    game.goToScene('house');
+    const scene = 'house';
+    debugger;
+    game.goToScene(scene);
     const plr = Player.create(game, resources.spriteSheets['LinkSheet'], "kevin");
     
     const cam = new LockedCamera();

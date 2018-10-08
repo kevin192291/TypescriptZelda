@@ -1,5 +1,6 @@
 import { IResources } from "./models/resources.interface";
 import { WeatherService } from "./internet/weather/weatherService";
+import { MapGenerator } from './maps/procedural/generator'
 import ex = require("excalibur");
 import TiledResource from "./maps/TiledResource";
 const admin = require('firebase-admin');
@@ -27,9 +28,14 @@ export function LoadAllMaps(): void {
             const resourceName = file.split('.').slice(0, -1).join('.');
             resources.maps[resourceName] = new TiledResource(testFolder + file);
             loader.addResource(resources.maps[resourceName]);
-            debugger;
         }
     });
+    const mapGenerator = new MapGenerator(10, 10, 16, 16);
+    const map = mapGenerator.getGeneratedTileMap();
+    const resourceName = map.name;
+    debugger;
+    resources.maps[resourceName] = new TiledResource(resourceName, map);
+    loader.addResource(resources.maps[resourceName]);
 }
 
 export function LoadAllSprites(): void {

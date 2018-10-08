@@ -10,6 +10,8 @@ export interface ITiledMap {
     height: number;
     layers: ITiledMapLayer[];
     nextobjectid: number;
+    tiledversion?: string;
+    type: string;
  
     /**
      * Map orientation (orthogonal)
@@ -87,7 +89,7 @@ export interface ITiledMap {
  
  export interface ITiledTileSet {
     firstgid: number;
-    image?: string;
+    image: string;
     tileproperties?: {[key: string]: string};
  
     /**
@@ -106,11 +108,12 @@ export interface ITiledMap {
     transparentcolor?: string;
     terrains?: ITiledMapTerrain[];
     tiles?: {[key: string]: { terrain: number[] }};
+    columns: number;
  
     /**
      * Refers to external tileset file (should be JSON)
      */
-    source: string;
+    source?: string;
  }
  
  export interface ITiledMapTerrain {
