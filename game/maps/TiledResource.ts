@@ -77,18 +77,19 @@ export default class TiledResource extends Resource<ITiledMap> {
             // If we find a source property, then
             // load the tileset data, merge it with
             // existing data, and load the image and sprite
-
-            this.data.tilesets.forEach(ts => {
-                if (ts.source) {
-                    var tileset = new Resource<ITiledTileSet>(
-                        this.externalTilesetPathAccessor(ts.source, ts), "json");
-
-                    promises.push(tileset.load().then(external => {
-                        (Object as any).assign(ts, external);
-                    }));
-                }
-            });
-
+            if (this.data.tilesets) {
+                this.data.tilesets.forEach(ts => {
+                    if (ts.source) {
+                        var tileset = new Resource<ITiledTileSet>(
+                            this.externalTilesetPathAccessor(ts.source, ts), "json");
+                        if (tileset.data !== null) {
+                            promises.push(tileset.load().then(external => {
+                                (Object as any).assign(ts, external);
+                            }));
+                        }
+                    }
+                });
+            }
             // wait or immediately resolve pending promises
             // for external tilesets
             Promise.join.apply(this, promises).then(() => {
@@ -165,7 +166,7 @@ export default class TiledResource extends Resource<ITiledMap> {
                     let gid = <number>layer.data[i];
                     if (gid !== 0) {
                         var ts = this.getTilesetForTile(gid);
-                        if (ts.tileproperties[gid] && ts.tileproperties[gid]['solid'] === 'true') {
+                        if (ts.tileproperties && ts.tileproperties[gid] && ts.tileproperties[gid]['solid'] === 'true') {
                             map.data[i].solid = true;
                         } else {
                             map.data[i].solid = false;
@@ -185,7 +186,7 @@ export default class TiledResource extends Resource<ITiledMap> {
  * Handles parsing of JSON tiled data
  */
 var parseJsonMap = (data: ITiledMap): ITiledMap => {
-
+debugger;
     // Decompress layers
     if (data.layers) {
         for (var layer of data.layers) {

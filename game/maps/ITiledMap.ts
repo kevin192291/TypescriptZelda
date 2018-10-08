@@ -15,7 +15,7 @@ export interface ITiledMap {
      * Map orientation (orthogonal)
      */
     orientation: string;
-    properties: {[key: string]: string};
+    properties?: {[key: string]: string};
  
     /**
      * Render order (right-down)
@@ -32,8 +32,8 @@ export interface ITiledMap {
     height: number;
     name: string;
     opacity: number;
-    properties: {[key: string]: string};
-    encoding: string;
+    properties?: {[key: string]: string};
+    encoding?: string;
     compression?: string;
  
     /**
@@ -48,8 +48,8 @@ export interface ITiledMap {
     /**
      * Draw order (topdown (default), index)
      */
-    draworder: string;
-    objects: ITiledMapObject[];
+    draworder?: string;
+    objects?: ITiledMapObject[];
  }
  
  export interface ITiledMapObject {
@@ -87,25 +87,25 @@ export interface ITiledMap {
  
  export interface ITiledTileSet {
     firstgid: number;
-    image: string;
-    tileproperties: {[key: string]: string};
+    image?: string;
+    tileproperties?: {[key: string]: string};
  
     /**
      * Excalibur texture associated with this tileset
      */
-    imageTexture: ex.Texture;
-    imageheight: number;
-    imagewidth: number;
-    margin: number;
-    name: string;
-    properties: {[key: string]: string};
-    spacing: number;
-    tilecount: number;
-    tileheight: number;
-    tilewidth: number;
-    transparentcolor: string;
-    terrains: ITiledMapTerrain[];
-    tiles: {[key: string]: { terrain: number[] }};
+    imageTexture?: ex.Texture;
+    imageheight?: number;
+    imagewidth?: number;
+    margin?: number;
+    name?: string;
+    properties?: {[key: string]: string};
+    spacing?: number;
+    tilecount?: number;
+    tileheight?: number;
+    tilewidth?: number;
+    transparentcolor?: string;
+    terrains?: ITiledMapTerrain[];
+    tiles?: {[key: string]: { terrain: number[] }};
  
     /**
      * Refers to external tileset file (should be JSON)

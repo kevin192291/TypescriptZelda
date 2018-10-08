@@ -27,6 +27,7 @@ export function LoadAllMaps(): void {
             const resourceName = file.split('.').slice(0, -1).join('.');
             resources.maps[resourceName] = new TiledResource(testFolder + file);
             loader.addResource(resources.maps[resourceName]);
+            debugger;
         }
     });
 }
