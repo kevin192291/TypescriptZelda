@@ -38,13 +38,14 @@
     "web-request": "^1.0.7"
   },
   "devDependencies": {
+    "@types/lodash-es": "^4.17.3",
     "@types/node": "^10.9.2",
     "devtron": "1.4.0",
     "electron": "^2.0.8",
     "electron-packager": "^12.1.1",
     "gulp": "^4.0.0",
-    "typescript": "2.3.2",
-    "xo": "^0.22.0"
+    "typescript": "^3.4.3",
+    "xo": "^0.24.0"
   },
   "xo": {
     "esnext": true,
