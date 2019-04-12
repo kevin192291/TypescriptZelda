@@ -1,8 +1,7 @@
-import TiledResource from "../maps/TiledResource";
-import { Texture, SpriteSheet } from "excalibur";
+import TiledResource = require('@excaliburjs/excalibur-tiled');
 
-export interface IResources {
-    maps: TiledResource[],
-    sprites: Texture[],
-    spriteSheets: SpriteSheet[],
+export interface Resources {
+    maps: TiledResource.TiledResource,
+    sprites: any[],
+    spriteSheets: any[],
 }

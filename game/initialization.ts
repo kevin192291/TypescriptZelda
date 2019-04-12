@@ -1,8 +1,6 @@
-import { IResources } from "./models/resources.interface";
 import { WeatherService } from "./internet/weather/weatherService";
-import { MapGenerator } from './maps/procedural/generator'
 import ex = require("excalibur");
-import TiledResource from "./maps/TiledResource";
+import TiledResource = require('@excaliburjs/excalibur-tiled');
 const admin = require('firebase-admin');
 
 admin.initializeApp({
@@ -13,6 +11,11 @@ admin.initializeApp({
     storageBucket: "",
     messagingSenderId: "273246580010"
 });
+export interface IResources {
+    maps: TiledResource.TiledResource[];
+    sprites: any[];
+    spriteSheets: any[];
+}
 export const loader: ex.Loader = new ex.Loader();
 export var resources: IResources = {
     maps: [],
@@ -23,19 +26,22 @@ export var resources: IResources = {
 export function LoadAllMaps(): void {
     const testFolder = './dist/assets/';
     const fs = require('fs');
+
+    //Load MAPS
     fs.readdirSync(testFolder).forEach((file: string) => {
         if (file.includes('.json')) {
             const resourceName = file.split('.').slice(0, -1).join('.');
-            resources.maps[resourceName] = new TiledResource(testFolder + file);
-            loader.addResource(resources.maps[resourceName]);
+            const last = new TiledResource.TiledResource(testFolder + file);
+            resources.maps.push(last);
+            loader.addResource(last);
         }
     });
-    const mapGenerator = new MapGenerator(10, 10, 16, 16);
-    const map = mapGenerator.getGeneratedTileMap();
-    const resourceName = map.name;
-    debugger;
-    resources.maps[resourceName] = new TiledResource(resourceName, map);
-    loader.addResource(resources.maps[resourceName]);
+    // const mapGenerator = new MapGenerator(10, 10, 16, 16);
+    // const map = mapGenerator.getGeneratedTileMap();
+    // const resourceName = map.name;
+    // debugger;
+    // resources.maps[resourceName] = new TiledResource(resourceName, map);
+    // loader.addResource(resources.maps[resourceName]);
 }
 
 export function LoadAllSprites(): void {
