@@ -31,7 +31,6 @@ export abstract class Character extends ex.Actor {
     public assignSprite(spriteFile: string) {
         var txPlayer = new ex.Texture(`/assets/sprites/characters/${spriteFile}`);
         txPlayer.load().then(value => {
-            debugger;
             this.addDrawing(txPlayer.asSprite());
         });
     }

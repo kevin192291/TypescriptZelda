@@ -1,7 +1,6 @@
 import * as ex from 'excalibur';
 import {
     Engine,
-    Scene,
     SpriteSheet,
 } from "excalibur";
 import { Character } from './Character';
@@ -26,8 +25,8 @@ export class Player extends Character {
     }
 
     public update(engine: Engine, delta) {
-        super.update(engine, delta);
         this.walk(engine);
+        super.update(engine, delta);
     }
 
     public _initialize(engine: Engine) {
