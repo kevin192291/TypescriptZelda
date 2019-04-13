@@ -30,7 +30,7 @@
     "electron-debug": "1.0.0",
     "electron-prebuilt": "^1.4.13",
     "excalibur": "0.14.0",
-    "firebase": "^5.4.1",
+    "firebase": "^5.9.4",
     "firebase-admin": "^6.0.0",
     "pako": "^1.0.6",
     "require": "^2.4.20",
@@ -39,10 +39,10 @@
   },
   "devDependencies": {
     "@types/lodash-es": "^4.17.3",
-    "@types/node": "^10.9.2",
+    "@types/node": "^10.14.4",
     "devtron": "1.4.0",
-    "electron": "^2.0.8",
-    "electron-packager": "^12.1.1",
+    "electron": "^2.0.18",
+    "electron-packager": "^12.2.0",
     "gulp": "^4.0.0",
     "typescript": "^3.4.3",
     "xo": "^0.24.0"
