@@ -15,10 +15,6 @@ export abstract class Character extends ex.Actor {
         this.collisionType = ex.CollisionType.Active;
         this.body.useBoxCollision();
 
-        this.on('precollision', (e: PreCollisionEvent) => {
-            console.log(`${e}`);
-        });
-
         this.color = ex.Color.Green;
         this.setHeight(16);
         this.setWidth(16);
