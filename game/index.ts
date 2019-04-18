@@ -2,10 +2,7 @@ const path = require('path');
 import * as ex from 'excalibur';
 import {
   CollisionResolutionStrategy,
-  CollisionEndEvent,
-  CollisionType,
   PreCollisionEvent,
-  Vector
 } from 'excalibur';
 import { Player } from './actors/Player';
 import {
@@ -15,6 +12,7 @@ import {
   resources,
   loader
 } from './initialization';
+import { store } from './states/app.state';
 
 const game: ex.Engine = new ex.Engine({
   displayMode: ex.DisplayMode.FullScreen
@@ -27,6 +25,9 @@ let mapData: any = {};
 LoadAllMaps();
 LoadAllSprites();
 LoadWeather();
+console.log(store.getState());
+store.dispatch({ type: 'INCREMENT' });
+console.log(store.getState());
 
 game.start(loader).then(() => {
   resources.maps.forEach(map => {
@@ -62,7 +63,6 @@ game.start(loader).then(() => {
               case 'warp':
                 const cell = tileMap.getCellByIndex(i);
                 const act = new ex.Actor(cell.x, cell.y, 16, 16);
-                
                 act.collisionType = ex.CollisionType.Active;
                 act.body.useBoxCollision();
                 warpZoneArray.push(act);
@@ -106,6 +106,8 @@ game.start(loader).then(() => {
       if (area) {
         game.goToScene(area.scene);
         game.currentScene.add(plr);
+        game.currentScene.createGroup('warpZones');
+        warpZones.add(warpZoneArray);
       }
     }
   });

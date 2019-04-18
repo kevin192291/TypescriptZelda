@@ -53,7 +53,6 @@ export class Player extends Character {
     this.walk(engine);
     if (this._needsUpdating) {
       super.update(engine, delta);
-      console.log(this.pos);
     }
   }
 
