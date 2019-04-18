@@ -8,7 +8,7 @@
          "name":"baseLayer",
          "opacity":1,
          "type":"tilelayer",
-         "visible":true,
+         "visible":false,
          "width":50,
          "x":0,
          "y":0
@@ -20,7 +20,7 @@
          "name":"baseLayer2",
          "opacity":1,
          "type":"tilelayer",
-         "visible":true,
+         "visible":false,
          "width":50,
          "x":0,
          "y":0
@@ -35,7 +35,7 @@
                 {
                  "name":"warpZoneData",
                  "type":"string",
-                 "value":"[{\"200,200\": { \"scene\": \"house1\" }}]"
+                 "value":"[{\"200,184\": { \"scene\": \"house1\" }}]"
                 }],
          "type":"tilelayer",
          "visible":true,

@@ -7,6 +7,12 @@
          "id":1,
          "name":"Tile Layer 1",
          "opacity":1,
+         "properties":[
+                {
+                 "name":"warpZoneData",
+                 "type":"string",
+                 "value":"[{\"64,144\": { \"scene\": \"LAST_SCENE\" }}]"
+                }],
          "type":"tilelayer",
          "visible":true,
          "width":10,
