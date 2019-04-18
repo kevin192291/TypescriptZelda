@@ -21,6 +21,7 @@ const game: ex.Engine = new ex.Engine({
 ex.Physics.enabled = true;
 ex.Physics.collisionResolutionStrategy = CollisionResolutionStrategy.Box;
 const warpZoneArray: any[] = [];
+let mapData: any = {};
 
 LoadAllMaps();
 LoadAllSprites();
@@ -31,6 +32,18 @@ game.start(loader).then(() => {
     const scene = new ex.Scene(game);
     const tileMap = map.getTileMap();
     map.data.layers.forEach(layer => {
+      if (layer.name === 'warpZones') {
+        if (layer.properties) {
+          (<any>layer).properties.forEach(prop => {
+            const objArr = JSON.parse(prop.value);
+            if (objArr) {
+              objArr.forEach(obj => {
+                mapData = obj;
+              });
+            }
+          });
+        }
+      }
       for (let i = 0; i < layer.data.length; i++) {
         const tileSet = map.getTilesetForTile(<number>layer.data[i]);
         if (!tileSet) {
@@ -46,7 +59,6 @@ game.start(loader).then(() => {
                 tileMap.getCellByIndex(i).solid = property.value;
                 break;
               case 'warp':
-                debugger;
                 const cell = tileMap.getCellByIndex(i);
                 const act = new ex.Actor(cell.x, cell.y, 16, 16);
                 act.collisionType = ex.CollisionType.Active;
@@ -75,20 +87,23 @@ game.start(loader).then(() => {
   const scene = 'overworld';
   game.goToScene(scene);
 
-  const warpZones = game.currentScene.createGroup("warpZones");
+  const warpZones = game.currentScene.createGroup('warpZones');
   warpZones.add(warpZoneArray);
 
-  const plr = Player.create(
-    game,
-    resources.spriteSheets['LinkSheet'],
-    'kevin'
-  );
-    warpZones.on('precollision', function(ev: PreCollisionEvent){
-      if (ev.other === plr) {
-          console.log("collision with player!");
-          // TODO: Lookup:
-          const lookupLocation = ev.actor.getWorldPos();
-          // game.goToScene(location service.locations[lookupLocation.x, lookupLocation.y]);
+  const plr = Player.create(game, resources.spriteSheets['LinkSheet'], 'kevin');
+
+  warpZones.on('precollision', function(ev: PreCollisionEvent) {
+    if (ev.other === plr) {
+      console.log('collision with player!');
+      // TODO: Lookup:
+      const lookupLocation = ev.actor.getWorldPos();
+      const area =
+        mapData[
+          `${Math.round(lookupLocation.x)},${Math.round(lookupLocation.y)}`
+        ];
+      if (area) {
+        game.goToScene(area.scene);
       }
-    });
+    }
+  });
 });

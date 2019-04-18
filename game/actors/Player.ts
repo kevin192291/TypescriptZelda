@@ -18,7 +18,6 @@ export class Player extends Character {
   private _walkKeyReleased = true;
   private _initComplete = false;
   private _needsUpdating = true;
-  private _warpZones: ex.Cell[] = [];
 
   private constructor(
     game: Engine,
@@ -34,9 +33,9 @@ export class Player extends Character {
     this._lockedCamera.setActorToFollow(this);
     game.currentScene.camera = this._lockedCamera;
 
-    this.on('precollision', (e: PreCollisionEvent) => {
-      console.log(`${e}`);
-    });
+    // this.on('precollision', (e: PreCollisionEvent) => {
+    //   console.log(`${e}`);
+    // });
   }
 
   public static create(
