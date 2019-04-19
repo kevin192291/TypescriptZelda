@@ -1,6 +1,10 @@
 const path = require('path');
 import * as ex from 'excalibur';
-import { CollisionResolutionStrategy, PreCollisionEvent, Vector } from 'excalibur';
+import {
+  CollisionResolutionStrategy,
+  PreCollisionEvent,
+  Vector
+} from 'excalibur';
 import { Player } from './actors/Player';
 import {
   LoadAllMaps,
@@ -24,73 +28,19 @@ LoadAllMaps();
 LoadAllSprites();
 LoadWeather();
 
-const store = configureStore(null);
-debugger;
-
 game.start(loader).then(() => {
-  resources.maps.forEach(map => {
-    const scene = new ex.Scene(game);
-    const tileMap = map.getTileMap();
-    map.data.layers.forEach(layer => {
-      if (layer.name === 'warpZones') {
-        if (layer.properties) {
-          (<any>layer).properties.forEach(prop => {
-            const objArr = JSON.parse(prop.value);
-            if (objArr) {
-              debugger;
-              // TODO: This is really bad, needs fixing
-              for (let key in objArr) {
-                Object.keys(objArr[key]).forEach(k => {
-                  mapData[k] = objArr[key][k];
-                });
-              }
-              // objArr.forEach(obj => {
-              //   mapData = obj;
-              // });
-            }
-          });
-        }
-      }
-      for (let i = 0; i < layer.data.length; i++) {
-        const tileSet = map.getTilesetForTile(<number>layer.data[i]);
-        if (!tileSet) {
-          continue;
-        }
-        const collision = (<any>tileSet).tiles.find(
-          t => t.id === <number>layer.data[i] - 1
-        );
-        if (collision && collision.properties) {
-          collision.properties.forEach(property => {
-            switch (property.name) {
-              case 'collision':
-                tileMap.getCellByIndex(i).solid = property.value;
-                break;
-              case 'warp':
-                const cell = tileMap.getCellByIndex(i);
-                const act = new ex.Actor(cell.x, cell.y, 16, 16);
-                act.collisionType = ex.CollisionType.Active;
-                act.body.useBoxCollision();
-                warpZoneArray.push(act);
-                break;
-              default:
-                break;
-            }
-          });
-        }
-      }
-    });
-    scene.addTileMap(tileMap);
-    game.addScene(path.basename(map.path).replace(/\.[^/.]+$/, ''), scene);
+  const store = configureStore(resources, game);
+  (<any>window).reduxState = store;
+  store.subscribe(() => {
+    const currentState = store.getState();
+    console.log(currentState);
+    debugger;
+
+    game.goToScene(currentState.currentPlace.name);
+    game.currentScene.add(plr);
+    // plr.pos = new Vector(parseInt(currentState.currentPlace.placeData.ENTRY_POINT_X), parseInt(currentState.currentPlace.placeData.ENTRY_POINT_Y));
   });
-  for (let sheet in resources.sprites) {
-    resources.spriteSheets[sheet] = new ex.SpriteSheet(
-      resources.sprites[sheet],
-      13,
-      13,
-      16,
-      16
-    );
-  }
+
   const scene = 'overworld';
   game.goToScene(scene);
 
@@ -108,14 +58,6 @@ game.start(loader).then(() => {
         mapData[
           `${Math.round(lookupLocation.x)},${Math.round(lookupLocation.y)}`
         ];
-      if (area) {
-        game.goToScene(area.scene);
-        game.currentScene.add(plr);
-        game.currentScene.createGroup('warpZones');
-        warpZones.add(warpZoneArray);
-        debugger;
-        plr.pos = new Vector(parseInt(area.ENTRY_POINT_X), parseInt(area.ENTRY_POINT_Y));
-      }
     }
   });
 });

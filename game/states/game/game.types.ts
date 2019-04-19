@@ -1,49 +1,24 @@
-// import * as ex from 'excalibur';
-
-// export const GAME_PLACE_UPDATE = 'GAME_PLACE_UPDATE';
-
-
-// interface WarpZone {
-//   name: string;
-//   ENTRY_POINT_X: number;
-//   ENTRY_POINT_Y: number;
-// }
-
-// interface Place {
-//   scene: ex.Scene;
-//   lastPlace: Place;
-//   sceneName: string;
-//   entryPoint: ex.Vector;
-//   warpZones: WarpZone[];
-// }
-
-// interface GameState {
-//   currentPlace: Place;
-//   paused: boolean;
-// }
-
-// export type GameActionTypes = GameState | Place | WarpZone;
-
-
-
 export const SETUP_STATE = 'GAME:SETUP_STATE';
+export const CHANGE_PLACE = 'GAME:CHANGE_PLACE';
 
 export interface WarpZone {
   tile_x: number;
   tile_y: number;
-  tilePos: ex.Vector;
+  actor: ex.Actor;
 }
 
 export interface Place {
-  place: ex.Scene;
+  scene: ex.Scene;
   name: string;
   warpZones: WarpZone[];
-  posAtEnter: ex.Vector;
-  posAtExit: ex.Vector;
+  posAtEnter?: ex.Vector;
+  posAtExit?: ex.Vector;
+  placeData?: any;
 }
 
 export interface GameState {
-  place: Place;
+  currentPlace: Place; //current place you are at NOW
+  places: Place[]; // All places loaded at start of game
 }
 
 interface SetupAction {
@@ -51,4 +26,9 @@ interface SetupAction {
   payload: GameState
 }
 
-export type GameActionTypes = SetupAction // | DeleteMessageAction
+interface ChangePlaceAction {
+  type: typeof CHANGE_PLACE;
+  payload: string
+}
+
+export type GameActionTypes = SetupAction | ChangePlaceAction // | DeleteMessageAction
