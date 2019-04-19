@@ -1,5 +1,8 @@
 export const SETUP_STATE = 'GAME:SETUP_STATE';
 export const CHANGE_PLACE = 'GAME:CHANGE_PLACE';
+export const LAST_PLACE = 'GAME:LAST_PLACE';
+export const UNDO = 'STATE:UNDO';
+export const REDO = 'STATE:REDO';
 
 export interface WarpZone {
   tile_x: number;
@@ -19,6 +22,7 @@ export interface Place {
 export interface GameState {
   currentPlace: Place; //current place you are at NOW
   places: Place[]; // All places loaded at start of game
+  previousPlace: Place;
 }
 
 interface SetupAction {
@@ -31,4 +35,16 @@ interface ChangePlaceAction {
   payload: string
 }
 
-export type GameActionTypes = SetupAction | ChangePlaceAction // | DeleteMessageAction
+interface LastPlaceAction {
+  type: typeof LAST_PLACE;
+}
+
+interface RedoAction {
+  type: typeof REDO;
+}
+
+export type GameActionTypes = SetupAction |
+ChangePlaceAction |
+LastPlaceAction |
+RedoAction
+;

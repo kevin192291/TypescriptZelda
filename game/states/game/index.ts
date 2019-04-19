@@ -1,7 +1,14 @@
 import { createStore, applyMiddleware, compose } from 'redux';
 import gameReducer from './game.reducers';
 import { GameState, Place, WarpZone } from './game.types';
-import { Actor, CollisionType, SpriteSheet, Scene, Cell, Engine } from 'excalibur';
+import {
+  Actor,
+  CollisionType,
+  SpriteSheet,
+  Scene,
+  Cell,
+  Engine
+} from 'excalibur';
 const path = require('path');
 
 const configureStore = (preloadedState, game) => {
@@ -13,12 +20,12 @@ const configureStore = (preloadedState, game) => {
 function mapInitialObject(resources, game: Engine): GameState {
   let initialState: GameState = {
     currentPlace: undefined,
-    places: []
+    places: [],
+    previousPlace: null
   };
 
   const places: Place[] = [];
   resources.maps.forEach(map => {
-    // const scene = new Scene(game);
     const tileMap = map.getTileMap();
     let mapData = Object;
     let place: Place = null;
@@ -37,13 +44,17 @@ function mapInitialObject(resources, game: Engine): GameState {
     });
     place.placeData = mapData;
     place.scene.addTileMap(tileMap);
-    game.addScene(path.basename(map.path).replace(/\.[^/.]+$/, ''), place.scene);
+    game.addScene(
+      path.basename(map.path).replace(/\.[^/.]+$/, ''),
+      place.scene
+    );
     places.push(place);
   });
 
   initialState = {
     currentPlace: places[0],
-    places: places
+    places: places,
+    previousPlace: null
   };
 
   for (let sheet in resources.sprites) {
