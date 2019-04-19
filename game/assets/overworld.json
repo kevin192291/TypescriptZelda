@@ -35,7 +35,7 @@
                 {
                  "name":"warpZoneData",
                  "type":"string",
-                 "value":"[{\"200,184\": { \"scene\": \"house1\" }}]"
+                 "value":"[{\"200,184\": { \"scene\": \"house1\", \"ENTRY_POINT_X\": \"64\", \"ENTRY_POINT_Y\": \"114\" }}]"
                 }],
          "type":"tilelayer",
          "visible":true,

@@ -11,7 +11,7 @@
                 {
                  "name":"warpZoneData",
                  "type":"string",
-                 "value":"[{\"64,144\": { \"scene\": \"LAST_SCENE\" }},{\"80,144\": { \"scene\": \"LAST_SCENE\" }}]"
+                 "value":"[\n{\"64,144\": { \"scene\": \"LAST_SCENE\" }},\n{\"80,144\": { \"scene\": \"LAST_SCENE\" }},\n{\"ENTRY_POINT\": \"64,112\" }\n]"
                 }],
          "type":"tilelayer",
          "visible":true,

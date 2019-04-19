@@ -45,6 +45,7 @@
     "electron": "^2.0.18",
     "electron-packager": "^12.2.0",
     "gulp": "^4.0.0",
+    "remote-redux-devtools": "^0.5.16",
     "typescript": "^3.4.3",
     "xo": "^0.24.0"
   },

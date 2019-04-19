@@ -1,9 +1,6 @@
 const path = require('path');
 import * as ex from 'excalibur';
-import {
-  CollisionResolutionStrategy,
-  PreCollisionEvent,
-} from 'excalibur';
+import { CollisionResolutionStrategy, PreCollisionEvent, Vector } from 'excalibur';
 import { Player } from './actors/Player';
 import {
   LoadAllMaps,
@@ -12,7 +9,8 @@ import {
   resources,
   loader
 } from './initialization';
-import { store } from './states/app.state';
+import { gameReducer } from './states/game/game.reducers';
+import configureStore from './states/game';
 
 const game: ex.Engine = new ex.Engine({
   displayMode: ex.DisplayMode.FullScreen
@@ -25,9 +23,9 @@ let mapData: any = {};
 LoadAllMaps();
 LoadAllSprites();
 LoadWeather();
-console.log(store.getState());
-store.dispatch({ type: 'INCREMENT' });
-console.log(store.getState());
+
+const store = configureStore(null);
+debugger;
 
 game.start(loader).then(() => {
   resources.maps.forEach(map => {
@@ -39,9 +37,16 @@ game.start(loader).then(() => {
           (<any>layer).properties.forEach(prop => {
             const objArr = JSON.parse(prop.value);
             if (objArr) {
-              objArr.forEach(obj => {
-                mapData = obj;
-              });
+              debugger;
+              // TODO: This is really bad, needs fixing
+              for (let key in objArr) {
+                Object.keys(objArr[key]).forEach(k => {
+                  mapData[k] = objArr[key][k];
+                });
+              }
+              // objArr.forEach(obj => {
+              //   mapData = obj;
+              // });
             }
           });
         }
@@ -108,6 +113,8 @@ game.start(loader).then(() => {
         game.currentScene.add(plr);
         game.currentScene.createGroup('warpZones');
         warpZones.add(warpZoneArray);
+        debugger;
+        plr.pos = new Vector(parseInt(area.ENTRY_POINT_X), parseInt(area.ENTRY_POINT_Y));
       }
     }
   });
