@@ -36,12 +36,6 @@ export function LoadAllMaps(): void {
             loader.addResource(last);
         }
     });
-    // const mapGenerator = new MapGenerator(10, 10, 16, 16);
-    // const map = mapGenerator.getGeneratedTileMap();
-    // const resourceName = map.name;
-    // debugger;
-    // resources.maps[resourceName] = new TiledResource(resourceName, map);
-    // loader.addResource(resources.maps[resourceName]);
 }
 
 export function LoadAllSprites(): void {

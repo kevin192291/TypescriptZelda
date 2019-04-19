@@ -16,7 +16,6 @@ export function gameReducer(
   state = initialState,
   action: GameActionTypes
 ): GameState {
-  debugger;
   switch (action.type) {
     case SETUP_STATE:
       return {
@@ -24,12 +23,13 @@ export function gameReducer(
         ...action.payload
       };
     case CHANGE_PLACE:
-    debugger;
-      return Object.assign({}, state, {
+      const newState = Object.assign({}, state, {
         previousPlace: state.currentPlace,
         currentPlace: state.places.find(p => p.name === action.payload),
         places: state.places
       });
+      debugger;
+      return newState;
     case LAST_PLACE:
       return Object.assign({}, state, {
         currentPlace: state.previousPlace,

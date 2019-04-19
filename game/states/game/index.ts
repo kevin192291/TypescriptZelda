@@ -66,7 +66,6 @@ function mapInitialObject(resources, game: Engine): GameState {
       16
     );
   }
-  game.goToScene('overworld');
   return initialState;
 }
 

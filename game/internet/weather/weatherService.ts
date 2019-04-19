@@ -51,7 +51,6 @@ export class WeatherService extends DataService<IWeather> {
         //document.styleSheets[0]['rules'][4].style.backgroundColor = 'black';
         html.style.backgroundColor = 'black';
 
-        debugger;
         if (current_hour < 4) {
             html.style.opacity = .7;
         }

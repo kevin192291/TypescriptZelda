@@ -15,34 +15,18 @@ export function setupState(newMessage: GameState): GameActionTypes {
 }
 
 export function changePlace(state, action): GameActionTypes {
-  state.previousPlace = state.currentPlace;
-  const nestedState = (state.currentPlace = state.places.find(
-    place => place.name === action
-  ));
-
   return {
     ...state,
-    nestedState
+    state
   };
 }
 
 export function lastPlace(state): GameActionTypes {
-  debugger;
-  state.previousPlace = state.currentPlace;
-  const nestedState = (state.currentPlace = state.previousPlace);
-
   return {
     ...state,
-    nestedState
+    state
   };
 }
 
-// TypeScript infers that this function is returning DeleteMessageAction
-// export function deleteMessage(timestamp: number): GameActionTypes {
-//   return {
-//     type: DELETE_MESSAGE,
-//     meta: {
-//       timestamp
-//     }
-//   }
-// }
+
+
