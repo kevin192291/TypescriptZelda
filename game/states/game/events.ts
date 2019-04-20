@@ -7,6 +7,8 @@ export function eventWatch(store, game: Engine, plr: Actor) {
     console.log(currentState);
     game.goToScene(currentState.currentPlace.name);
     game.currentScene.add(plr);
+    game.currentScene.camera.strategy.lockToActor(plr);
+    game.currentScene.camera.zoom(100/currentState.currentPlace.scene.tileMaps[0].cols, 3000);
 
     if (game.currentScene.getGroup('warpZones')) {
       game.currentScene.removeGroup('warpZones');

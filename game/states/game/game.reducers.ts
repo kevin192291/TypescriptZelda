@@ -3,7 +3,7 @@ import {
   GameActionTypes,
   SETUP_STATE,
   CHANGE_PLACE,
-  LAST_PLACE
+  LAST_PLACE,
 } from './game.types';
 
 const initialState: GameState = {
@@ -23,16 +23,16 @@ export function gameReducer(
         ...action.payload
       };
     case CHANGE_PLACE:
-      const currentPlace = {};
+      const currentPlace: any = {};
       Object.assign(currentPlace, state.currentPlace);
-      console.log('current',currentPlace);
+      console.log('current',currentPlace.name);
       console.log('payload',action.payload);
       const newState = Object.assign({}, state, {
         previousPlace: currentPlace,
         currentPlace: state.places.find(p => p.name === action.payload),
         places: state.places
       });
-      console.log('new', newState);
+      console.log('new', newState.currentPlace.name);
       console.log('---------------------')
       return newState;
     case LAST_PLACE:
