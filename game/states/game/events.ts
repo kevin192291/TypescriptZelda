@@ -1,8 +1,9 @@
 import { PreCollisionEvent, Actor, Engine } from 'excalibur';
+import { GameState } from './game.types';
 
 export function eventWatch(store, game: Engine, plr: Actor) {
   store.subscribe(() => {
-    const currentState = store.getState();
+    const currentState: GameState = store.getState();
     console.log(currentState);
     game.goToScene(currentState.currentPlace.name);
     game.currentScene.add(plr);
@@ -22,10 +23,15 @@ export function eventWatch(store, game: Engine, plr: Actor) {
             `${Math.round(lookupLocation.x)},${Math.round(lookupLocation.y)}`
           ];
         if (area && area.scene === 'LAST_PLACE') {
-          store.dispatch({ type: 'GAME:LAST_PLACE' });
+          const currentState: GameState = store.getState();
+          store.dispatch({
+            type: 'GAME:CHANGE_PLACE',
+            payload: currentState.previousPlace.name
+          });
         } else if (area) {
           store.dispatch({ type: 'GAME:CHANGE_PLACE', payload: area.scene });
         }
+        warpZones.off('precollision');
       }
     });
     // plr.pos = new Vector(parseInt(currentState.currentPlace.placeData.ENTRY_POINT_X), parseInt(currentState.currentPlace.placeData.ENTRY_POINT_Y));

@@ -23,12 +23,17 @@ export function gameReducer(
         ...action.payload
       };
     case CHANGE_PLACE:
+      const currentPlace = {};
+      Object.assign(currentPlace, state.currentPlace);
+      console.log('current',currentPlace);
+      console.log('payload',action.payload);
       const newState = Object.assign({}, state, {
-        previousPlace: state.currentPlace,
+        previousPlace: currentPlace,
         currentPlace: state.places.find(p => p.name === action.payload),
         places: state.places
       });
-      debugger;
+      console.log('new', newState);
+      console.log('---------------------')
       return newState;
     case LAST_PLACE:
       return Object.assign({}, state, {

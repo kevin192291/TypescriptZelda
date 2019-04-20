@@ -15,6 +15,7 @@ export function setupState(newMessage: GameState): GameActionTypes {
 }
 
 export function changePlace(state, action): GameActionTypes {
+  console.log('change page action called');
   return {
     ...state,
     state
