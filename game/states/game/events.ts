@@ -24,14 +24,15 @@ export function eventWatch(store, game: Engine, plr: Actor) {
           ];
         if (area && area.scene === 'LAST_PLACE') {
           const currentState: GameState = store.getState();
+          warpZones.off('precollision');
           store.dispatch({
             type: 'GAME:CHANGE_PLACE',
             payload: currentState.previousPlace.name
           });
         } else if (area) {
+          warpZones.off('precollision');
           store.dispatch({ type: 'GAME:CHANGE_PLACE', payload: area.scene });
         }
-        warpZones.off('precollision');
       }
     });
     // plr.pos = new Vector(parseInt(currentState.currentPlace.placeData.ENTRY_POINT_X), parseInt(currentState.currentPlace.placeData.ENTRY_POINT_Y));
