@@ -4,7 +4,6 @@ import {
   SpriteSheet,
   LockedCamera,
   BaseCamera,
-  PreCollisionEvent
 } from 'excalibur';
 import { Character } from './Character';
 
@@ -65,6 +64,9 @@ export class Player extends Character {
   }
 
   public walk(engine) {
+    if (engine.input.keyboard.wasPressed(ex.Input.Keys.Q)) {
+      engine.isDebug = !engine.isDebug;
+    }
     if (
       engine.input.keyboard.isHeld(ex.Input.Keys.W) ||
       engine.input.keyboard.isHeld(ex.Input.Keys.Up)

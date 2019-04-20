@@ -15,6 +15,7 @@ const game: ex.Engine = new ex.Engine({
 });
 ex.Physics.enabled = true;
 ex.Physics.collisionResolutionStrategy = ex.CollisionResolutionStrategy.Box;
+game.isDebug = true;
 
 LoadAllMaps();
 LoadAllSprites();
