@@ -10,10 +10,19 @@ import {
   Engine
 } from 'excalibur';
 const path = require('path');
+const reduxModule = require('redux');
+reduxModule.__DO_NOT_USE__ActionTypes.INIT = '@@redux/INIT';
+reduxModule.__DO_NOT_USE__ActionTypes.REPLACE = '@@redux/REPLACE';
+require('electron-redux-devtools').install();
 
 const configureStore = (preloadedState, game) => {
   preloadedState = mapInitialObject(preloadedState, game);
-  const store = createStore(gameReducer, preloadedState);
+  const store = createStore(
+    gameReducer,
+    preloadedState,
+    
+    (<any>window).__REDUX_DEVTOOLS_EXTENSION__ && (<any>window).__REDUX_DEVTOOLS_EXTENSION__()
+  );
   return store;
 };
 

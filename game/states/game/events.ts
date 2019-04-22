@@ -4,15 +4,11 @@ import { GameState } from './game.types';
 export function eventWatch(store, game: Engine, plr: Actor) {
   store.subscribe(() => {
     const currentState: GameState = store.getState();
-    console.log(currentState);
     game.goToScene(currentState.currentPlace.name);
     game.currentScene.add(plr);
     game.currentScene.camera.strategy.lockToActor(plr);
-    game.currentScene.camera.zoom(100/currentState.currentPlace.scene.tileMaps[0].cols, 3000);
+    // game.currentScene.camera.zoom(100/currentState.currentPlace.scene.tileMaps[0].cols, 3000);
 
-    if (game.currentScene.getGroup('warpZones')) {
-      game.currentScene.removeGroup('warpZones');
-    }
     const warpZones = game.currentScene.createGroup('warpZones');
     currentState.currentPlace.warpZones.forEach(zone =>
       warpZones.add(zone.actor)
@@ -26,7 +22,6 @@ export function eventWatch(store, game: Engine, plr: Actor) {
           ];
         if (area && area.scene === 'LAST_PLACE') {
           const currentState: GameState = store.getState();
-          warpZones.off('precollision');
           store.dispatch({
             type: 'GAME:CHANGE_PLACE',
             payload: currentState.previousPlace.name
