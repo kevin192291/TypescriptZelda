@@ -1,21 +1,11 @@
 import {
   GameState,
-  SETUP_STATE,
-  GameActionTypes,
-  Place,
-  CHANGE_PLACE
+  GameActionTypes
 } from './game.types';
-
-// TypeScript infers that this function is returning SendMessageAction
-export function setupState(newMessage: GameState): GameActionTypes {
-  return {
-    type: SETUP_STATE,
-    payload: newMessage
-  };
-}
 
 export function changePlace(state, action): GameActionTypes {
   console.log('change page action called');
+  debugger;
   return {
     ...state,
     state

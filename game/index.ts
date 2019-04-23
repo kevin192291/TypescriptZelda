@@ -5,7 +5,8 @@ import {
   LoadAllSprites,
   LoadWeather,
   resources,
-  loader
+  loader,
+  parseMapData
 } from './initialization';
 import configureStore from './states/game';
 import eventWatch from './states/game/events';
@@ -19,12 +20,17 @@ game.isDebug = true;
 
 LoadAllMaps();
 LoadAllSprites();
-LoadWeather();
+// LoadWeather();
 
 game.start(loader).then(() => {
-  const store = configureStore(resources, game);
-  (<any>window).store = store;
+  const places = parseMapData(resources, game); // Load maps and sprites
+  const store = configureStore({
+    currentPlace: 'overworld',
+    previousPlace: null
+  });
+  (window as any).store = store;
+  
   const plr = Player.create(game, resources.spriteSheets['LinkSheet'], 'kevin');
-  eventWatch(store, game, plr);
-  store.dispatch({ type: 'GAME:CHANGE_PLACE', payload: 'overworld'});
+  eventWatch(store, game, places, plr);
+  store.dispatch({type: 'GAME:CHANGE_PAGE', payload: 'overworld'});
 });
