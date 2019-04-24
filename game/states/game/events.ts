@@ -1,13 +1,5 @@
-import {
-  PreCollisionEvent,
-  Actor,
-  Engine,
-  Trigger,
-  Vector,
-  Logger
-} from 'excalibur';
+import { Actor, Engine, Trigger, Vector, Logger } from 'excalibur';
 import { GameState } from './game.types';
-import { ActionCreators } from 'redux-undo';
 
 let placeData = null;
 
@@ -30,7 +22,7 @@ function onTrigger() {
     });
     const actor: Actor = that.target;
     if (place.entryX && place.entryY) {
-      actor.pos = new Vector(place.entryX+8, place.entryY+8);
+      actor.pos = new Vector(place.entryX + 8, place.entryY + 8);
     }
   }
 }
@@ -58,6 +50,22 @@ export function eventWatch(store, game: Engine, places, plr: Actor) {
         })
       );
     });
+    
+    for (let key in currentPlace.placeData) {
+      if (currentPlace.placeData[key].type === 'warp') {
+        const splitKey = key.split(',');
+        game.add(
+          new Trigger({
+            width: 16,
+            height: 16,
+            pos: new Vector(parseInt(splitKey[0].trim())+8, parseInt(splitKey[1].trim())+8),
+            repeat: -1,
+            action: onTrigger,
+            target: plr
+          })
+        );
+      }
+    };
 
     // game.currentScene.camera.zoom(100/currentState.currentPlace.scene.tileMaps[0].cols, 3000);
     // plr.pos = new Vector(parseInt(currentState.currentPlace.placeData.ENTRY_POINT_X), parseInt(currentState.currentPlace.placeData.ENTRY_POINT_Y));

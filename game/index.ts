@@ -25,12 +25,12 @@ LoadAllSprites();
 game.start(loader).then(() => {
   const places = parseMapData(resources, game); // Load maps and sprites
   const store = configureStore({
-    currentPlace: 'overworld',
+    currentPlace: 'castle',
     previousPlace: null
   });
   (window as any).store = store;
   
   const plr = Player.create(game, resources.spriteSheets['LinkSheet'], 'kevin');
   eventWatch(store, game, places, plr);
-  store.dispatch({type: 'GAME:CHANGE_PAGE', payload: 'overworld'});
+  store.dispatch({type: 'GAME:CHANGE_PLACE', payload: 'castle'});
 });

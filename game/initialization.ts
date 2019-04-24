@@ -9,13 +9,7 @@ import {
   Scene,
   Engine,
   Cell,
-  Actor,
-  CollisionType,
-  Trigger,
-  Vector,
-  Logger
 } from 'excalibur';
-import { WarpZone } from './states/game/game.types';
 import { Place } from './models/place.interface';
 import { EventTiles } from './models/eventTiles.interface';
 
@@ -36,7 +30,7 @@ export var resources: IResources = {
 };
 
 export function LoadAllMaps(): void {
-  const testFolder = './dist/assets/';
+  const testFolder = './dist/assets/tilemaps/';
   const fs = require('fs');
 
   //Load MAPS

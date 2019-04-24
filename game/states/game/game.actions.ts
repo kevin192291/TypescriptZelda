@@ -5,7 +5,6 @@ import {
 
 export function changePlace(state, action): GameActionTypes {
   console.log('change page action called');
-  debugger;
   return {
     ...state,
     state
