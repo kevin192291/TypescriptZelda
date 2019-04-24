@@ -16,15 +16,22 @@ function onTrigger() {
   Logger.getInstance().info('Trigger was triggered!');
   const that: Trigger = this;
   let place =
-    placeData.placeData[`${that.getWorldPos().x - 8},${that.getWorldPos().y - 8}`];
+    placeData.placeData[
+      `${that.getWorldPos().x - 8},${that.getWorldPos().y - 8}`
+    ];
   if (!place) {
-    place = placeData.placeData[`${that.getWorldPos().x},${that.getWorldPos().y}`];
+    place =
+      placeData.placeData[`${that.getWorldPos().x},${that.getWorldPos().y}`];
   }
   if (place) {
     (window as any).store.dispatch({
       type: 'GAME:CHANGE_PLACE',
       payload: place.scene
     });
+    const actor: Actor = that.target;
+    if (place.entryX && place.entryY) {
+      actor.pos = new Vector(place.entryX+8, place.entryY+8);
+    }
   }
 }
 

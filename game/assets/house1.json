@@ -11,7 +11,7 @@
                 {
                  "name":"warpZoneData",
                  "type":"string",
-                 "value":"[\n{\"64,144\": { \"scene\": \"LAST_PLACE\" }},\n{\"80,144\": { \"scene\": \"LAST_PLACE\" }},\n{\"ENTRY_POINT\": \"64,112\" }\n]"
+                 "value":"[\n{\"64,144\": { \"scene\": \"overworld\", \"entryX\": 192, \"entryY\": 192  }},\n{\"80,144\": { \"scene\": \"overworld\", \"entryX\": 192, \"entryY\": 192  }}\n]"
                 }],
          "type":"tilelayer",
          "visible":true,
