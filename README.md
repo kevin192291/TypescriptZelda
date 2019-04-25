@@ -38,5 +38,5 @@ Here is an example:
   {"272,192": {"type":"warp", "scene": "overworld2"}}
 ]
 ```
-
+If you need to test your JSON you can test it [here](https://jsonformatter.curiousconcept.com/)
 Test the map by running the game, It should work succesfully.
