@@ -5,7 +5,7 @@ Cross platform, developed using Electron and Typescript as well as ExcaliburJS.
 
 ## Making TileMaps
 Making tile maps has been made as easy as I can make it.
-Designing a tile map is done with [Tiled](https://https://www.mapeditor.org/)
+Designing a tile map is done with [Tiled](https://www.mapeditor.org/)
 
 ### Creating a new map
 - In Tiled, Click "File" -> "New" -> "New Map" (or CTRL+N)
