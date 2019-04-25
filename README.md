@@ -33,8 +33,10 @@ Then add an object under that key using { }
 it must have a type, in this case, warp, and a scene that will be transitioned to. Lets say overworld2
 Here is an example:
 
+```javascript
 [
-{"272,192": {"type":"warp", "scene": "overworld2"}}
+  {"272,192": {"type":"warp", "scene": "overworld2"}}
 ]
+```
 
 Test the map by running the game, It should work succesfully.
