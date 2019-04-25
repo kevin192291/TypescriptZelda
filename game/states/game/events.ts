@@ -1,5 +1,6 @@
 import { Actor, Engine, Trigger, Vector, Logger } from 'excalibur';
 import { GameState } from './game.types';
+import { Place } from '../../models/place.interface';
 
 let placeData = null;
 
@@ -27,7 +28,7 @@ function onTrigger() {
   }
 }
 
-export function eventWatch(store, game: Engine, places, plr: Actor) {
+export function eventWatch(store, game: Engine, places: Place[], plr: Actor) {
   let cachedPlaceName = null;
 
   store.subscribe(() => {
@@ -36,8 +37,12 @@ export function eventWatch(store, game: Engine, places, plr: Actor) {
     game.currentScene.add(plr);
     game.currentScene.camera.strategy.lockToActor(plr);
 
-    const currentPlace = places.find(p => p.name === currentState.currentPlace);
+    const currentPlace: Place = places.find(p => p.name === currentState.currentPlace);
     placeData = currentPlace;
+    debugger;
+    if (currentPlace.music && currentPlace.music[currentPlace.name]) {
+      currentPlace.music[currentPlace.name].play();
+    }
     currentPlace.eventTiles.warpZones.forEach(zone => {
       game.add(
         new Trigger({

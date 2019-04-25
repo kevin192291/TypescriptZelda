@@ -6,7 +6,8 @@ import {
   LoadWeather,
   resources,
   loader,
-  parseMapData
+  parseMapData,
+  LoadAllMusic
 } from './initialization';
 import configureStore from './states/game';
 import eventWatch from './states/game/events';
@@ -20,6 +21,7 @@ game.isDebug = true;
 
 LoadAllMaps();
 LoadAllSprites();
+LoadAllMusic();
 // LoadWeather();
 
 game.start(loader).then(() => {

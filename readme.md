@@ -1,10 +1,20 @@
 # communityGame
+![](https://github.com/kevin192291/communityGame/raw/master/documentation/gameDemoGif.gif)
 A game that can be easly modified to be anything anyone wants it to be.
 Cross platform, developed using Electron and Typescript as well as ExcaliburJS.
 
+## Setup
+Setting up is easy:
+```
+git clone https://github.com/kevin192291/communityGame.git
+cd communityGame
+npm i
+npm run start
+```
+
 ## Making TileMaps
 Making tile maps has been made as easy as I can make it.
-Designing a tile map is done with [Tiled](https://https://www.mapeditor.org/)
+Designing a tile map is done with [Tiled](https://www.mapeditor.org/)
 
 ### Creating a new map
 - In Tiled, Click "File" -> "New" -> "New Map" (or CTRL+N)
@@ -32,8 +42,10 @@ Then add an object under that key using { }
 it must have a type, in this case, warp, and a scene that will be transitioned to. Lets say overworld2
 Here is an example:
 
+```javascript
 [
-{"272,192": {"type":"warp", "scene": "overworld2"}}
+  {"272,192": {"type":"warp", "scene": "overworld2"}}
 ]
-
+```
+If you need to test your JSON you can test it [here](https://jsonformatter.curiousconcept.com/)
 Test the map by running the game, It should work succesfully.

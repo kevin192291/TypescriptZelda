@@ -7,4 +7,5 @@ export interface Place {
   posAtEnter?: ex.Vector;
   posAtExit?: ex.Vector;
   placeData?: any;
+  music?: any;
 }

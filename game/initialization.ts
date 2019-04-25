@@ -26,7 +26,8 @@ export const loader: ex.Loader = new ex.Loader();
 export var resources: IResources = {
   maps: [],
   sprites: [],
-  spriteSheets: []
+  spriteSheets: [],
+  music: [],
 };
 
 export function LoadAllMaps(): void {
@@ -62,6 +63,22 @@ export function LoadAllSprites(): void {
   });
 }
 
+export function LoadAllMusic(): void {
+  const testFolder = './dist/assets/music/';
+  const fs = require('fs');
+  debugger;
+  fs.readdirSync(testFolder).forEach((file: string) => {
+    if (file.includes('.mp3')) {
+      const resourceName = file
+        .split('.')
+        .slice(0, -1)
+        .join('.');
+      resources.music[resourceName] = new ex.Sound(testFolder + file);
+      loader.addResource(resources.music[resourceName]);
+    }
+  });
+}
+
 export function LoadWeather() {
   debugger;
   let weatherService = new WeatherService();
@@ -71,7 +88,7 @@ export function LoadWeather() {
 }
 
 export function parseMapData(resources, game: Engine): Place[] {
-  const places: any[] = [];
+  const places: Place[] = [];
   resources.maps.forEach(map => {
     const tileMap = map.getTileMap();
     let mapData = Object;
@@ -86,11 +103,15 @@ export function parseMapData(resources, game: Engine): Place[] {
         eventTiles: eventTiles,
         posAtExit: null,
         posAtEnter: null,
+        music: [],
         name: path.basename(map.path).replace(/\.[^/.]+$/, '')
       };
     });
     place.placeData = mapData;
     place.scene.addTileMap(tileMap);
+    if (resources.music[place.name]) {
+      place.music[place.name] = (resources.music[place.name]);
+    }
     game.addScene(
       path.basename(map.path).replace(/\.[^/.]+$/, ''),
       place.scene
