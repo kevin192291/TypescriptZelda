@@ -9,13 +9,25 @@ export class HealthBar extends Actor {
     this._target = target;
     target.add(this);
     target.on('postdraw', (d: PostDrawEvent) => {
+      if (this._target.health === 0) {
+        this._target.kill();
+      } else {
         d.ctx.strokeStyle = Color.Black.toString();
-        d.ctx.fillStyle = Color.Green.toString();
-        d.ctx.lineWidth = .3;
-        d.ctx.font = 'normal 5px sans-serif';
-        d.ctx.fillText('HP: ' + (this._target.health).toString(), -31, 12);
-        d.ctx.fillRect(-8, 9, this._target.health * (.16), 3);
-        d.ctx.strokeRect(-8,9,16,3); // Outline healthbar in red
+        if (this._target.health >= 45) {
+            d.ctx.fillStyle = Color.Orange.toString();
+        }
+        if (this._target.health > 85) {
+            d.ctx.fillStyle = Color.Green.toString();
+        }
+        if (this._target.health < 45) {
+            d.ctx.fillStyle = Color.Red.toString();
+        }
+        d.ctx.lineWidth = 0.3;
+        d.ctx.font = 'normal 5px hylianFont';
+        d.ctx.fillText('HP: ' + this._target.health.toString(), -31, 12);
+        d.ctx.fillRect(-8, 9, this._target.health * 0.16, 3);
+        d.ctx.strokeRect(-8, 9, 16, 3); // Outline healthbar in red
+      }
     });
   }
 }
