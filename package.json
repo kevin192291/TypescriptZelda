@@ -48,8 +48,11 @@
     "electron-packager": "^12.2.0",
     "electron-redux-devtools": "^0.3.4",
     "gulp": "^4.0.0",
+    "gulp-changed": "^3.2.0",
     "remote-redux-devtools": "^0.5.16",
     "typescript": "^3.4.3",
+    "webpack": "^4.30.0",
+    "webpack-cli": "^3.3.1",
     "xo": "^0.24.0"
   },
   "xo": {
