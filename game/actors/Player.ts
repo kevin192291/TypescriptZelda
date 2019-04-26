@@ -11,7 +11,6 @@ export class Player extends Character {
   public static instance: Player = null;
 
   private _lockedCamera = null;
-  private _baseCamera = null;
   private _spriteSheet: SpriteSheet = null;
   private _game: Engine = null;
   private _walkKeyReleased = true;
@@ -27,7 +26,6 @@ export class Player extends Character {
     this._spriteSheet = spriteSheet;
     this._game = game;
     this._lockedCamera = new LockedCamera();
-    this._baseCamera = new BaseCamera();
 
     this._lockedCamera.setActorToFollow(this);
     game.currentScene.camera = this._lockedCamera;
@@ -66,6 +64,7 @@ export class Player extends Character {
   public walk(engine) {
     if (engine.input.keyboard.wasPressed(ex.Input.Keys.Q)) {
       engine.isDebug = !engine.isDebug;
+      this.health = this.health -1;
     }
     if (
       engine.input.keyboard.isHeld(ex.Input.Keys.W) ||

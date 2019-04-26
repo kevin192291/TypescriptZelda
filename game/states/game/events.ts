@@ -1,4 +1,4 @@
-import { Actor, Engine, Trigger, Vector, Logger } from 'excalibur';
+import { Actor, Engine, Trigger, Vector, Logger, Color } from 'excalibur';
 import { GameState } from './game.types';
 import { Place } from '../../models/place.interface';
 
@@ -39,10 +39,9 @@ export function eventWatch(store, game: Engine, places: Place[], plr: Actor) {
 
     const currentPlace: Place = places.find(p => p.name === currentState.currentPlace);
     placeData = currentPlace;
-    debugger;
-    if (currentPlace.music && currentPlace.music[currentPlace.name]) {
-      currentPlace.music[currentPlace.name].play();
-    }
+    currentPlace.music && currentPlace.music[currentPlace.name] && currentPlace.music[currentPlace.name].play();
+    currentPlace.posAtEnter && (plr.pos = currentPlace.posAtEnter);
+
     currentPlace.eventTiles.warpZones.forEach(zone => {
       game.add(
         new Trigger({

@@ -66,7 +66,6 @@ export function LoadAllSprites(): void {
 export function LoadAllMusic(): void {
   const testFolder = './dist/assets/music/';
   const fs = require('fs');
-  debugger;
   fs.readdirSync(testFolder).forEach((file: string) => {
     if (file.includes('.mp3')) {
       const resourceName = file
@@ -108,6 +107,8 @@ export function parseMapData(resources, game: Engine): Place[] {
       };
     });
     place.placeData = mapData;
+    if (mapData['entry_x'] && mapData['entry_y'])
+    place.posAtEnter = new ex.Vector(mapData['entry_x'], mapData['entry_y']);
     place.scene.addTileMap(tileMap);
     if (resources.music[place.name]) {
       place.music[place.name] = (resources.music[place.name]);

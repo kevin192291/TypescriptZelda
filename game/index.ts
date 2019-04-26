@@ -11,6 +11,7 @@ import {
 } from './initialization';
 import configureStore from './states/game';
 import eventWatch from './states/game/events';
+import { HealthBar } from './actors/health-bar';
 
 const game: ex.Engine = new ex.Engine({
   displayMode: ex.DisplayMode.FullScreen
@@ -33,6 +34,8 @@ game.start(loader).then(() => {
   (window as any).store = store;
   
   const plr = Player.create(game, resources.spriteSheets['LinkSheet'], 'kevin');
+  new HealthBar(plr);
+
   eventWatch(store, game, places, plr);
   store.dispatch({type: 'GAME:CHANGE_PLACE', payload: 'castle'});
 });
