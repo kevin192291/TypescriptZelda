@@ -14,9 +14,9 @@ export class Player extends Character {
   private _initComplete = false;
   private _needsUpdating = true;
   private _direction: Direction = Direction.Down;
+
   private _inventory: Item[] = [];
   private _activeItem: Item = null;
-  private _itemInUse: boolean = false;
 
   private constructor(game: Engine, spriteSheet: SpriteSheet, name?: string) {
     super(game, name);
@@ -65,19 +65,6 @@ export class Player extends Character {
     return this._activeItem;
   }
 
-  public isItemInUse(): boolean {
-    return this._itemInUse;
-  }
-
-  public SetItemInUse(itemInUse: boolean) {
-    this._itemInUse = itemInUse;
-  }
-
-  public takeDamage(amount: number) {
-    this.health = this.health - amount;
-    this._game.currentScene.camera.shake(3, 3, 400);
-  }
-
   public dealDamage(amount: number) {
     debugger;
     const target = { ...this.getWorldPos() };
@@ -119,8 +106,11 @@ export class Player extends Character {
     if (engine.input.keyboard.wasPressed(ex.Input.Keys.Q)) {
       engine.isDebug = !engine.isDebug;
     }
+
     if (engine.input.keyboard.isHeld(ex.Input.Keys.Space)) {
-      this._itemInUse = true;
+      this._activeItem.use();
+      this._needsUpdating = true;
+      return;
     }
 
     if (

@@ -37,7 +37,7 @@
     "redux-undo": "^1.0.0-beta9-9-7",
     "require": "^2.4.20",
     "typed-rest-client": "^1.0.9",
-    "uglify-js": "^3.5.8",
+    "uglify-js": "^3.5.9",
     "web-request": "^1.0.7"
   },
   "devDependencies": {
