@@ -12,6 +12,7 @@ import {
 import configureStore from './states/game';
 import eventWatch from './states/game/events';
 import { HealthBar } from './actors/health-bar';
+import { Sword } from './items/sword';
 
 const game: ex.Engine = new ex.Engine({
   displayMode: ex.DisplayMode.FullScreen
@@ -35,6 +36,9 @@ game.start(loader).then(() => {
   
   const plr = Player.create(game, resources.spriteSheets['LinkSheet'], 'kevin');
   new HealthBar(plr);
+  
+  const sword = new Sword('excalibur.png');
+  plr.pickUp(sword);
 
   eventWatch(store, game, places, plr);
   store.dispatch({type: 'GAME:CHANGE_PLACE', payload: 'castle'});
