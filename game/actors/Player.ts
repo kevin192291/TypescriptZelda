@@ -1,10 +1,5 @@
 import * as ex from 'excalibur';
-import {
-  Engine,
-  SpriteSheet,
-  LockedCamera,
-  BaseCamera,
-} from 'excalibur';
+import { Engine, SpriteSheet, LockedCamera } from 'excalibur';
 import { Character } from './Character';
 
 export class Player extends Character {
@@ -17,11 +12,7 @@ export class Player extends Character {
   private _initComplete = false;
   private _needsUpdating = true;
 
-  private constructor(
-    game: Engine,
-    spriteSheet: SpriteSheet,
-    name?: string
-  ) {
+  private constructor(game: Engine, spriteSheet: SpriteSheet, name?: string) {
     super(game, name);
     this._spriteSheet = spriteSheet;
     this._game = game;
@@ -35,11 +26,7 @@ export class Player extends Character {
     // });
   }
 
-  public static create(
-    game: Engine,
-    spriteSheet: SpriteSheet,
-    name?: string
-  ) {
+  public static create(game: Engine, spriteSheet: SpriteSheet, name?: string) {
     if (this.instance === null) {
       this.instance = new Player(game, spriteSheet, name);
     }
@@ -61,10 +48,31 @@ export class Player extends Character {
     }
   }
 
+  public takeDamage(amount: number) {
+    this.health = this.health - amount;
+    this._game.currentScene.camera.shake(3, 3, 400);
+  }
+
+  public dealDamage(amount: number) {
+    debugger;
+    const cell = this._game.currentScene.tileMaps[0].getCellByPoint(
+      this.getWorldPos().x,
+      this.getWorldPos().y - 16
+    );
+    if (cell.sprites.length > 1) {
+      cell.removeSprite(cell.sprites[cell.sprites.length]);
+      cell.sprites[1].spriteId = cell.sprites[0].spriteId;
+      cell.sprites[1].spriteSheetKey = cell.sprites[0].spriteSheetKey;
+      cell.solid = false;
+    }
+  }
+
   public walk(engine) {
     if (engine.input.keyboard.wasPressed(ex.Input.Keys.Q)) {
       engine.isDebug = !engine.isDebug;
-      this.health = this.health -1;
+    }
+    if (engine.input.keyboard.wasPressed(ex.Input.Keys.Space)) {
+      this.dealDamage(0);
     }
     if (
       engine.input.keyboard.isHeld(ex.Input.Keys.W) ||

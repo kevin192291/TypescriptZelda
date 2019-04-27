@@ -1,6 +1,6 @@
 import { Npc } from './Npc';
 import { Player } from './Player';
-import { UIActor, Color, Actor, PostDrawEvent } from 'excalibur';
+import { Color, Actor, PostDrawEvent } from 'excalibur';
 
 export class HealthBar extends Actor {
   private _target: Player | Npc = null;
