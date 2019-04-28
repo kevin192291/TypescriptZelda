@@ -41,9 +41,9 @@ export class Player extends Character {
 
   public update(engine: Engine, delta) {
     this.walk(engine);
-    if (this._needsUpdating) {
+    // if (this._needsUpdating) {
       super.update(engine, delta);
-    }
+    // }
   }
 
   public _initialize(engine: Engine) {
@@ -102,14 +102,18 @@ export class Player extends Character {
     return this._direction;
   }
 
+  public needsUpdating(update: boolean) {
+    this._needsUpdating = update;
+  }
+
   public walk(engine) {
     if (engine.input.keyboard.wasPressed(ex.Input.Keys.Q)) {
       engine.isDebug = !engine.isDebug;
     }
 
     if (engine.input.keyboard.isHeld(ex.Input.Keys.Space)) {
-      this._activeItem.use();
       this._needsUpdating = true;
+      this._activeItem.use();
       return;
     }
 
