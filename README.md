@@ -1,4 +1,4 @@
-# communityGame
+# ⚔️ communityGame
 ![](https://github.com/kevin192291/communityGame/raw/master/documentation/gameDemoGif.gif)
 A game that can be easly modified to be anything anyone wants it to be.
 Cross platform, developed using Electron and Typescript as well as ExcaliburJS.
