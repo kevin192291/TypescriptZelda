@@ -16,7 +16,7 @@ export class HealthBar extends Actor {
         if (this._target.health >= 45) {
             d.ctx.fillStyle = Color.Orange.toString();
         }
-        if (this._target.health > 85) {
+        if (this._target.health >= 80) {
             d.ctx.fillStyle = Color.Green.toString();
         }
         if (this._target.health < 45) {

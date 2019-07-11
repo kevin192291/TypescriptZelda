@@ -9,7 +9,7 @@ export class RedPotion extends Item {
   public use() {
     const owner = this.getOwner();
     if (owner && !this._empty) {
-      owner.health = owner.health + 5;
+      owner.health = owner.health + 20;
       this._empty = true;
       this.drop();
     }

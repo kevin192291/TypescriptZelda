@@ -76,6 +76,11 @@ export class Player extends Character {
     return this._activeItem;
   }
 
+  public setActiveItem(item): Item {
+    this._activeItem = item;
+    return item;
+  }
+
   public dealDamage(amount: number) {
     debugger;
     const target = { ...this.getWorldPos() };

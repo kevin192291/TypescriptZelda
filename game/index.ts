@@ -44,7 +44,8 @@ game.start(loader).then(() => {
 
   const healthPotion = new RedPotion();
   plr.pickUp(healthPotion);
-  plr.getActiveItem().use();
+
+  plr.setActiveItem(healthPotion);
 
   eventWatch(store, game, places, plr);
   store.dispatch({type: 'GAME:CHANGE_PLACE', payload: 'castle'});
