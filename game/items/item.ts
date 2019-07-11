@@ -1,45 +1,42 @@
-import ex = require("excalibur");
-import { Player } from "../actors/Player";
-import { Npc } from "../actors/Npc";
-import { Actor, Vector } from "excalibur";
+import ex = require('excalibur');
+import { Player } from '../actors/Player';
+import { Actor, Vector } from 'excalibur';
 
 export abstract class Item extends Actor {
-    public abstract use();
-    public abstract drop();
-    private _ownedBy: Player;
+  public abstract use();
+  public abstract drop();
+  private _ownedBy: Player;
 
-    constructor() {
-        super();
-        this.collisionType = ex.CollisionType.Active;
-        this.body.useBoxCollision();
-        this.visible = false;
-    }
+  constructor() {
+    super();
+    this.collisionType = ex.CollisionType.Active;
+    this.body.useBoxCollision();
+    this.visible = false;
+  }
 
-    public setOwner(owner: Player) {
-        this._ownedBy = owner;
+  public setOwner(owner: Player) {
+    this._ownedBy = owner;
+  }
+  public getOwner(): Player {
+    return this._ownedBy;
+  }
+
+  public draw(ctx: any, delta: number) {
+    super.draw(ctx, delta);
+    if (this.getOwner().getActiveItem() === this) {
+      if (this.getOwner().isItemInUse()) {
+        this.visible = true;
+        this.actions.delay(1000);
+        this.getOwner().SetItemInUse(false);
       }
-    public getOwner(): Player {
-        return this._ownedBy;
     }
+    debugger;
+  }
 
-    public draw(ctx: any, delta: number) {
-        debugger;
-      super.draw(ctx, delta); // perform base drawing logic
-      if (this.getOwner().getActiveItem() === this) {
-          if (this.getOwner().isItemInUse()) {
-              this.visible = true;
-              this.actions.delay(1000);
-              this.getOwner().SetItemInUse(false);
-          }
-      }
-      debugger;
-    }
-
-    public assignLocalSprite(itemFile: string) {
-        var txPlayer = new ex.Texture(`./game/assets/items/${itemFile}`);
-        txPlayer.load().then(value => {
-            this.addDrawing(txPlayer.asSprite());
-        });
-    }
-
+  public assignLocalSprite(itemFile: string) {
+    var txPlayer = new ex.Texture(`./game/assets/items/${itemFile}`);
+    txPlayer.load().then(value => {
+      this.addDrawing(txPlayer.asSprite());
+    });
+  }
 }
