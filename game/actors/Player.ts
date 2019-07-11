@@ -14,9 +14,9 @@ export class Player extends Character {
   private _initComplete = false;
   private _needsUpdating = true;
   private _direction: Direction = Direction.Down;
+
   private _inventory: Item[] = [];
   private _activeItem: Item = null;
-  private _itemInUse: boolean = false;
 
   private constructor(game: Engine, spriteSheet: SpriteSheet, name?: string) {
     super(game, name);
@@ -41,9 +41,9 @@ export class Player extends Character {
 
   public update(engine: Engine, delta) {
     this.walk(engine);
-    if (this._needsUpdating) {
+    // if (this._needsUpdating) {
       super.update(engine, delta);
-    }
+    // }
   }
 
   public _initialize(engine: Engine) {
@@ -63,19 +63,6 @@ export class Player extends Character {
 
   public getActiveItem(): Item {
     return this._activeItem;
-  }
-
-  public isItemInUse(): boolean {
-    return this._itemInUse;
-  }
-
-  public SetItemInUse(itemInUse: boolean) {
-    this._itemInUse = itemInUse;
-  }
-
-  public takeDamage(amount: number) {
-    this.health = this.health - amount;
-    this._game.currentScene.camera.shake(3, 3, 400);
   }
 
   public dealDamage(amount: number) {
@@ -115,12 +102,19 @@ export class Player extends Character {
     return this._direction;
   }
 
+  public needsUpdating(update: boolean) {
+    this._needsUpdating = update;
+  }
+
   public walk(engine) {
     if (engine.input.keyboard.wasPressed(ex.Input.Keys.Q)) {
       engine.isDebug = !engine.isDebug;
     }
+
     if (engine.input.keyboard.isHeld(ex.Input.Keys.Space)) {
-      this._itemInUse = true;
+      this._needsUpdating = true;
+      this._activeItem.use();
+      return;
     }
 
     if (

@@ -11,7 +11,6 @@ export abstract class Item extends Actor {
     super();
     this.collisionType = ex.CollisionType.Active;
     this.body.useBoxCollision();
-    this.visible = false;
   }
 
   public setOwner(owner: Player) {
@@ -21,17 +20,15 @@ export abstract class Item extends Actor {
     return this._ownedBy;
   }
 
-  public draw(ctx: any, delta: number) {
-    super.draw(ctx, delta);
-    if (this.getOwner().getActiveItem() === this) {
-      if (this.getOwner().isItemInUse()) {
-        this.visible = true;
-        this.actions.delay(1000);
-        this.getOwner().SetItemInUse(false);
-      }
-    }
-    debugger;
-  }
+  // public draw(ctx: any, delta: number) {
+  //     debugger;
+  //   super.draw(ctx, delta); // perform base drawing logic
+  //   if (this.getOwner().getActiveItem() === this) {
+  //           this.visible = true;
+  //           // this.actions.delay(1000);
+  //   }
+  //   debugger;
+  // }
 
   public assignLocalSprite(itemFile: string) {
     var txPlayer = new ex.Texture(`./game/assets/items/${itemFile}`);
@@ -39,4 +36,5 @@ export abstract class Item extends Actor {
       this.addDrawing(txPlayer.asSprite());
     });
   }
+  debugger;
 }
