@@ -4,6 +4,7 @@ import { CollisionType, CollisionStartEvent, RotationType } from 'excalibur';
 
 export class Sword extends Item {
   private _inUse: boolean = false;
+  private _useageCount: number = 0;
   constructor(swordName: string, swordPower: number = 15) {
     super();
     this.assignLocalSprite(swordName);
@@ -22,6 +23,9 @@ export class Sword extends Item {
   }
 
   public use() {
+    if (!this.currentDrawing) return;
+    this._inUse = true;
+    this._useageCount++;
     const owner = this.getOwner();
     switch (owner.getDirection()) {
       case Direction.Up:
@@ -73,6 +77,7 @@ export class Sword extends Item {
       default:
         break;
     }
+    this._inUse = false;
   }
   public drop() {}
 }

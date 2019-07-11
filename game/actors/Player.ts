@@ -42,7 +42,7 @@ export class Player extends Character {
   public update(engine: Engine, delta) {
     this.walk(engine);
     // if (this._needsUpdating) {
-      super.update(engine, delta);
+    super.update(engine, delta);
     // }
   }
 
@@ -57,8 +57,19 @@ export class Player extends Character {
   public pickUp(item: Item) {
     item.setOwner(this); // set the new owner of this item
     this._inventory.push(item); // add the item to the owner's inventory
-    this.add(item); // add the item to the actor to draw the item on
+    if (item.shouldDraw !== false) { // some items don't need to be drawn
+      this.add(item); // add the item to the actor to draw the item on
+    }
     !this._activeItem && (this._activeItem = item); // if user has no item equipt, use this one
+  }
+
+  public drop(item: Item) {
+    for (let index = 0; index < this._inventory.length; index++) {
+      if (this._inventory[index] === item) {
+        debugger;
+        this._inventory.splice(index, 1);
+      }
+    }
   }
 
   public getActiveItem(): Item {

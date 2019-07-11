@@ -3,6 +3,7 @@ import { Player } from '../actors/Player';
 import { Actor, Vector } from 'excalibur';
 
 export abstract class Item extends Actor {
+  public shouldDraw: boolean = true;
   public abstract use();
   public abstract drop();
   private _ownedBy: Player;
