@@ -111,7 +111,7 @@ export class Player extends Character {
       engine.isDebug = !engine.isDebug;
     }
 
-    if (engine.input.keyboard.isHeld(ex.Input.Keys.Space)) {
+    if (engine.input.keyboard.wasPressed(ex.Input.Keys.Space)) {
       this._needsUpdating = true;
       this._activeItem.use();
       return;

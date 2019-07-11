@@ -1,7 +1,11 @@
-# communityGame
+# ⚔️ communityGame
 ![](https://github.com/kevin192291/communityGame/raw/master/documentation/gameDemoGif.gif)
 A game that can be easly modified to be anything anyone wants it to be.
 Cross platform, developed using Electron and Typescript as well as ExcaliburJS.
+
+- 💪 Any pull requests are strongly appreciated!
+- 🆘 Please log as many bugs as possible!
+- 👻 Please share, I would like to get as many people looking as possible so this project doesn't dissapear
 
 ## Setup
 Setting up is easy:
@@ -12,7 +16,7 @@ npm i
 npm run start
 ```
 
-## Making TileMaps
+## 🏰 Making TileMaps
 Making tile maps has been made as easy as I can make it.
 Designing a tile map is done with [Tiled](https://www.mapeditor.org/)
 
