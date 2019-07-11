@@ -1,6 +1,8 @@
 import * as ex from 'excalibur';
 import { Engine, SpriteSheet, LockedCamera } from 'excalibur';
 import { Character } from './Character';
+import { Direction } from '../models/direction.enum';
+import { Item } from '../items/item';
 
 export class Player extends Character {
   public static instance: Player = null;
@@ -11,6 +13,10 @@ export class Player extends Character {
   private _walkKeyReleased = true;
   private _initComplete = false;
   private _needsUpdating = true;
+  private _direction: Direction = Direction.Down;
+
+  private _inventory: Item[] = [];
+  private _activeItem: Item = null;
 
   private constructor(game: Engine, spriteSheet: SpriteSheet, name?: string) {
     super(game, name);
@@ -35,9 +41,9 @@ export class Player extends Character {
 
   public update(engine: Engine, delta) {
     this.walk(engine);
-    if (this._needsUpdating) {
+    // if (this._needsUpdating) {
       super.update(engine, delta);
-    }
+    // }
   }
 
   public _initialize(engine: Engine) {
@@ -48,16 +54,37 @@ export class Player extends Character {
     }
   }
 
-  public takeDamage(amount: number) {
-    this.health = this.health - amount;
-    this._game.currentScene.camera.shake(3, 3, 400);
+  public pickUp(item: Item) {
+    item.setOwner(this); // set the new owner of this item
+    this._inventory.push(item); // add the item to the owner's inventory
+    this.add(item); // add the item to the actor to draw the item on
+    !this._activeItem && (this._activeItem = item); // if user has no item equipt, use this one
+  }
+
+  public getActiveItem(): Item {
+    return this._activeItem;
   }
 
   public dealDamage(amount: number) {
     debugger;
+    const target = { ...this.getWorldPos() };
+    switch (this._direction) {
+      case Direction.Up:
+        target.y -= 16;
+        break;
+      case Direction.Down:
+        target.y += 16;
+        break;
+      case Direction.Left:
+        target.x -= 16;
+        break;
+      case Direction.Right:
+        target.x += 16;
+        break;
+    }
     const cell = this._game.currentScene.tileMaps[0].getCellByPoint(
-      this.getWorldPos().x,
-      this.getWorldPos().y - 16
+      target.x,
+      target.y
     );
     if (cell.sprites.length > 1) {
       cell.removeSprite(cell.sprites[cell.sprites.length]);
@@ -67,18 +94,35 @@ export class Player extends Character {
     }
   }
 
+  public setDirection(direction: Direction) {
+    this._direction = direction;
+  }
+
+  public getDirection(): Direction {
+    return this._direction;
+  }
+
+  public needsUpdating(update: boolean) {
+    this._needsUpdating = update;
+  }
+
   public walk(engine) {
     if (engine.input.keyboard.wasPressed(ex.Input.Keys.Q)) {
       engine.isDebug = !engine.isDebug;
     }
-    if (engine.input.keyboard.wasPressed(ex.Input.Keys.Space)) {
-      this.dealDamage(0);
+
+    if (engine.input.keyboard.isHeld(ex.Input.Keys.Space)) {
+      this._needsUpdating = true;
+      this._activeItem.use();
+      return;
     }
+
     if (
       engine.input.keyboard.isHeld(ex.Input.Keys.W) ||
       engine.input.keyboard.isHeld(ex.Input.Keys.Up)
     ) {
       if (this._walkKeyReleased) {
+        this.setDirection(Direction.Up);
         this._walkKeyReleased = false;
         this.vel.setTo(0, -100);
         this.setDrawing('up');
@@ -89,6 +133,7 @@ export class Player extends Character {
       engine.input.keyboard.isHeld(ex.Input.Keys.Down)
     ) {
       if (this._walkKeyReleased) {
+        this.setDirection(Direction.Down);
         this._walkKeyReleased = false;
         this.vel.setTo(0, 100);
         this.setDrawing('down');
@@ -99,6 +144,7 @@ export class Player extends Character {
       engine.input.keyboard.isHeld(ex.Input.Keys.Left)
     ) {
       if (this._walkKeyReleased) {
+        this.setDirection(Direction.Left);
         this._walkKeyReleased = false;
         this.vel.setTo(-100, 0);
         this.setDrawing('left');
@@ -109,6 +155,7 @@ export class Player extends Character {
       engine.input.keyboard.isHeld(ex.Input.Keys.Right)
     ) {
       if (this._walkKeyReleased) {
+        this.setDirection(Direction.Right);
         this._walkKeyReleased = false;
         this.vel.setTo(100, 0);
         this.setDrawing('right');

@@ -24,6 +24,10 @@ export abstract class Character extends ex.Actor {
         engine.currentScene.camera.rotation = 45;
     }
 
+    public takeDamage(amount: number) {
+        this.health = this.health - amount;
+      }
+
     public assignSprite(spriteFile: string) {
         var txPlayer = new ex.Texture(`/assets/sprites/characters/${spriteFile}`);
         txPlayer.load().then(value => {

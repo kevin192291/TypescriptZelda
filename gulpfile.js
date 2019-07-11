@@ -22,6 +22,12 @@ gulp.task('copy-assets', function() {
     .src('./game/assets/music/*.*')
     .pipe(changed('dist/assets/music'))
     .pipe(gulp.dest('dist/assets/music'));
+
+    gulp
+    .src('./game/assets/items/*.*')
+    .pipe(changed('dist/assets/items'))
+    .pipe(gulp.dest('dist/assets/items'));
+
     // Copy everything else in the asset directory
   return gulp
     .src('./game/assets/*.*')

@@ -36,6 +36,7 @@ export function eventWatch(store, game: Engine, places: Place[], plr: Actor) {
     game.goToScene(currentState.currentPlace);
     game.currentScene.add(plr);
     game.currentScene.camera.strategy.lockToActor(plr);
+    game.currentScene.camera.zoom(3, 500);
 
     const currentPlace: Place = places.find(p => p.name === currentState.currentPlace);
     placeData = currentPlace;
