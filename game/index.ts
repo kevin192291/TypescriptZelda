@@ -14,6 +14,7 @@ import eventWatch from './states/game/events';
 import { HealthBar } from './actors/health-bar';
 import { Sword } from './items/sword';
 import { RedPotion } from './items/redPotion';
+import { ButtonsUI } from './actors/buttons-ui';
 
 const game: ex.Engine = new ex.Engine({
   displayMode: ex.DisplayMode.FullScreen
@@ -38,15 +39,17 @@ game.start(loader).then(() => {
   const plr = Player.create(game, resources.spriteSheets['LinkSheet'], 'kevin');
   plr.health = 65;
   new HealthBar(plr);
+
   
   const sword = new Sword('excalibur.png');
   plr.pickUp(sword);
-
+  
   const healthPotion = new RedPotion();
   plr.pickUp(healthPotion);
-
+  
   plr.setActiveItem(healthPotion);
-
+  
   eventWatch(store, game, places, plr);
   store.dispatch({type: 'GAME:CHANGE_PLACE', payload: 'castle'});
+  new ButtonsUI(game);
 });

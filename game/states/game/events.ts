@@ -1,4 +1,4 @@
-import { Actor, Engine, Trigger, Vector, Logger, Color } from 'excalibur';
+import { Actor, Engine, Trigger, Vector, Logger } from 'excalibur';
 import { GameState } from './game.types';
 import { Place } from '../../models/place.interface';
 
@@ -36,7 +36,7 @@ export function eventWatch(store, game: Engine, places: Place[], plr: Actor) {
     game.goToScene(currentState.currentPlace);
     game.currentScene.add(plr);
     game.currentScene.camera.strategy.lockToActor(plr);
-    game.currentScene.camera.zoom(3, 500);
+    // game.currentScene.camera.zoom(3, 500);
 
     const currentPlace: Place = places.find(p => p.name === currentState.currentPlace);
     placeData = currentPlace;

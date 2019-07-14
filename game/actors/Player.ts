@@ -1,5 +1,5 @@
 import * as ex from 'excalibur';
-import { Engine, SpriteSheet, LockedCamera } from 'excalibur';
+import { Engine, SpriteSheet, Actor } from 'excalibur';
 import { Character } from './Character';
 import { Direction } from '../models/direction.enum';
 import { Item } from '../items/item';
@@ -7,7 +7,6 @@ import { Item } from '../items/item';
 export class Player extends Character {
   public static instance: Player = null;
 
-  private _lockedCamera = null;
   private _spriteSheet: SpriteSheet = null;
   private _game: Engine = null;
   private _walkKeyReleased = true;
@@ -22,10 +21,7 @@ export class Player extends Character {
     super(game, name);
     this._spriteSheet = spriteSheet;
     this._game = game;
-    this._lockedCamera = new LockedCamera();
-
-    this._lockedCamera.setActorToFollow(this);
-    game.currentScene.camera = this._lockedCamera;
+    game.currentScene.camera.strategy.lockToActor(this);
 
     // this.on('precollision', (e: PreCollisionEvent) => {
     //   console.log(`${e}`);
