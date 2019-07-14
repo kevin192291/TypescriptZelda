@@ -3,6 +3,7 @@ import { Engine, SpriteSheet, Actor } from 'excalibur';
 import { Character } from './Character';
 import { Direction } from '../models/direction.enum';
 import { Item } from '../items/item';
+import { ButtonsUI } from './buttons-ui';
 
 export class Player extends Character {
   public static instance: Player = null;
@@ -12,14 +13,16 @@ export class Player extends Character {
   private _walkKeyReleased = true;
   private _initComplete = false;
   private _direction: Direction = Direction.Down;
+  private _ui: ButtonsUI;
 
   private _inventory: Item[] = [];
   private _activeItem: Item = null;
 
-  private constructor(game: Engine, spriteSheet: SpriteSheet, name?: string) {
+  private constructor(game: Engine, ui: ButtonsUI, spriteSheet: SpriteSheet, name?: string) {
     super(game, name);
     this._spriteSheet = spriteSheet;
     this._game = game;
+    this._ui = ui;
     game.currentScene.camera.strategy.lockToActor(this);
 
     // this.on('precollision', (e: PreCollisionEvent) => {
@@ -27,9 +30,9 @@ export class Player extends Character {
     // });
   }
 
-  public static create(game: Engine, spriteSheet: SpriteSheet, name?: string) {
+  public static create(game: Engine, ui: ButtonsUI, spriteSheet: SpriteSheet, name?: string) {
     if (this.instance === null) {
-      this.instance = new Player(game, spriteSheet, name);
+      this.instance = new Player(game, ui, spriteSheet, name);
     }
     return this.instance;
   }
@@ -52,6 +55,7 @@ export class Player extends Character {
   public pickUp(item: Item) {
     item.setOwner(this); // set the new owner of this item
     this._inventory.push(item); // add the item to the owner's inventory
+    this._ui.assignPrimaryLocalSprite('Red Potion.png');
     if (item.shouldDraw !== false) { // some items don't need to be drawn
       this.add(item); // add the item to the actor to draw the item on
     }
@@ -61,8 +65,9 @@ export class Player extends Character {
   public drop(item: Item) {
     for (let index = 0; index < this._inventory.length; index++) {
       if (this._inventory[index] === item) {
-        debugger;
         this._inventory.splice(index, 1);
+        debugger;
+        this._ui.assignPrimaryLocalSprite('excalibur.png');
       }
     }
   }
@@ -77,7 +82,6 @@ export class Player extends Character {
   }
 
   public dealDamage(amount: number) {
-    debugger;
     const target = { ...this.getWorldPos() };
     switch (this._direction) {
       case Direction.Up:

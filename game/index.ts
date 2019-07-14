@@ -38,14 +38,10 @@ game.start(loader).then(() => {
   });
   (window as any).store = store;
   
-  const plr = Player.create(game, resources.spriteSheets['LinkSheet'], 'kevin');
-  debugger;
+  const ui = new ButtonsUI(game);
+  const plr = Player.create(game, ui, resources.spriteSheets['LinkSheet'], 'kevin');
   plr.health = 65;
   new HealthBar(plr);
-  
-  
-  const ui = new ButtonsUI(game);
-  ui.assignLocalSprite('Red Potion.png');
 
   const sword = new Sword('excalibur.png');
   plr.pickUp(sword);

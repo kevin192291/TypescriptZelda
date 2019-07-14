@@ -1,31 +1,39 @@
 import * as ex from 'excalibur';
 import { Actor } from 'excalibur';
-import { IResources } from '../models/resources.interface';
 
 export class ButtonsUI extends Actor {
   private _primary = new ex.UIActor(10,5,25,25);
   private _secondary = new ex.UIActor(30,5,25,25);
-  private _texture: ex.Texture;
+  private _primaryTexture: ex.Texture;
+  private _secondaryTexture: ex.Texture;
   private _game: ex.Engine;
 
   constructor(game: ex.Engine) {
     super();
     this._game = game;
-    // const primary = new ex.Actor(15, game.currentScene.camera.dy, 50, 50);
     this._primary.color = ex.Color.Green;
     this._primary.color = ex.Color.Red;
     game.add(this._primary);
     game.add(this._secondary);
   }
 
-  public assignLocalSprite(itemFile: string) {
-    this._game.remove(this._primary);
-    this._texture = new ex.Texture(`./game/assets/items/${itemFile}`);
-    this._texture.load().then(value => {
-      const sprite = this._texture.asSprite();
-      sprite.fill(ex.Color.Red);
-      this._primary.addDrawing(sprite);
+  public assignPrimaryLocalSprite(itemFile: string) {
+    this._primaryTexture = new ex.Texture(`./game/assets/items/${itemFile}`);
+    this._primaryTexture.load().then(value => {
+      const sprite = this._primaryTexture.asSprite();
+      this._primary.addDrawing(itemFile, sprite);
+      this._primary.setDrawing(itemFile);
       this._game.add(this._primary);
+    });
+  }
+
+  public assignSecondaryLocalSprite(itemFile: string) {
+    this._secondaryTexture = new ex.Texture(`./game/assets/items/${itemFile}`);
+    this._secondaryTexture.load().then(value => {
+      const sprite = this._secondaryTexture.asSprite();
+      this._secondary.addDrawing(itemFile, sprite);
+      this._secondary.setDrawing(itemFile);
+      this._game.add(this._secondary);
     });
   }
 }
