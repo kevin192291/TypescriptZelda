@@ -7,7 +7,8 @@ import {
   resources,
   loader,
   parseMapData,
-  LoadAllMusic
+  LoadAllMusic,
+  LoadAllItemIcons
 } from './initialization';
 import configureStore from './states/game';
 import eventWatch from './states/game/events';
@@ -26,6 +27,7 @@ game.isDebug = true;
 LoadAllMaps();
 LoadAllSprites();
 LoadAllMusic();
+LoadAllItemIcons();
 // LoadWeather();
 
 game.start(loader).then(() => {
@@ -37,10 +39,14 @@ game.start(loader).then(() => {
   (window as any).store = store;
   
   const plr = Player.create(game, resources.spriteSheets['LinkSheet'], 'kevin');
+  debugger;
   plr.health = 65;
   new HealthBar(plr);
-
   
+  
+  const ui = new ButtonsUI(game);
+  ui.assignLocalSprite('Red Potion.png');
+
   const sword = new Sword('excalibur.png');
   plr.pickUp(sword);
   
@@ -51,5 +57,4 @@ game.start(loader).then(() => {
   
   eventWatch(store, game, places, plr);
   store.dispatch({type: 'GAME:CHANGE_PLACE', payload: 'castle'});
-  new ButtonsUI(game);
 });

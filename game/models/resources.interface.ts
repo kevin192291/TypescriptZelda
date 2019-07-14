@@ -1,8 +1,9 @@
 import TiledResource = require('@excaliburjs/excalibur-tiled');
 
 export interface IResources {
-    maps: any[], // TiledResource.TiledResource,
-    sprites: any[],
-    spriteSheets: any[],
-    music: any[],
+    maps: any[]; // TiledResource.TiledResource,
+    sprites: any[];
+    spriteSheets: any[];
+    items: any[];
+    music: any[];
 }

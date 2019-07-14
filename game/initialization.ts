@@ -27,6 +27,7 @@ export var resources: IResources = {
   maps: [],
   sprites: [],
   spriteSheets: [],
+  items: [],
   music: [],
 };
 
@@ -59,6 +60,21 @@ export function LoadAllSprites(): void {
         .join('.');
       resources.sprites[resourceName] = new ex.Texture(testFolder + file);
       loader.addResource(resources.sprites[resourceName]);
+    }
+  });
+}
+
+export function LoadAllItemIcons(): void {
+  const testFolder = './dist/assets/items/';
+  const fs = require('fs');
+  fs.readdirSync(testFolder).forEach((file: string) => {
+    if (file.includes('.bmp') || file.includes('.png') || file.includes('.jpg')) {
+      const resourceName = file
+        .split('.')
+        .slice(0, -1)
+        .join('.');
+      resources.items[resourceName] = new ex.Texture(testFolder + file);
+      loader.addResource(resources.items[resourceName]);
     }
   });
 }

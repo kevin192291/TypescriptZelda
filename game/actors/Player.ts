@@ -11,7 +11,6 @@ export class Player extends Character {
   private _game: Engine = null;
   private _walkKeyReleased = true;
   private _initComplete = false;
-  private _needsUpdating = true;
   private _direction: Direction = Direction.Down;
 
   private _inventory: Item[] = [];
@@ -115,7 +114,6 @@ export class Player extends Character {
   }
 
   public needsUpdating(update: boolean) {
-    this._needsUpdating = update;
   }
 
   public walk(engine) {
@@ -124,7 +122,6 @@ export class Player extends Character {
     }
 
     if (engine.input.keyboard.wasPressed(ex.Input.Keys.Space)) {
-      this._needsUpdating = true;
       this._activeItem.use();
       return;
     }
@@ -138,7 +135,6 @@ export class Player extends Character {
         this._walkKeyReleased = false;
         this.vel.setTo(0, -100);
         this.setDrawing('up');
-        this._needsUpdating = true;
       }
     } else if (
       engine.input.keyboard.isHeld(ex.Input.Keys.S) ||
@@ -149,7 +145,6 @@ export class Player extends Character {
         this._walkKeyReleased = false;
         this.vel.setTo(0, 100);
         this.setDrawing('down');
-        this._needsUpdating = true;
       }
     } else if (
       engine.input.keyboard.isHeld(ex.Input.Keys.A) ||
@@ -160,7 +155,6 @@ export class Player extends Character {
         this._walkKeyReleased = false;
         this.vel.setTo(-100, 0);
         this.setDrawing('left');
-        this._needsUpdating = true;
       }
     } else if (
       engine.input.keyboard.isHeld(ex.Input.Keys.D) ||
@@ -171,7 +165,6 @@ export class Player extends Character {
         this._walkKeyReleased = false;
         this.vel.setTo(100, 0);
         this.setDrawing('right');
-        this._needsUpdating = true;
       }
     }
 
@@ -182,7 +175,6 @@ export class Player extends Character {
       this.vel.setTo(0, 0);
       this.setDrawing('up_idle');
       this._walkKeyReleased = true;
-      this._needsUpdating = false;
     } else if (
       engine.input.keyboard.wasReleased(ex.Input.Keys.S) ||
       engine.input.keyboard.wasReleased(ex.Input.Keys.Down)
@@ -190,7 +182,6 @@ export class Player extends Character {
       this.vel.setTo(0, 0);
       this.setDrawing('down_idle');
       this._walkKeyReleased = true;
-      this._needsUpdating = false;
     } else if (
       engine.input.keyboard.wasReleased(ex.Input.Keys.A) ||
       engine.input.keyboard.wasReleased(ex.Input.Keys.Right)
@@ -198,7 +189,6 @@ export class Player extends Character {
       this.vel.setTo(0, 0);
       this.setDrawing('right_idle');
       this._walkKeyReleased = true;
-      this._needsUpdating = false;
     } else if (
       engine.input.keyboard.wasReleased(ex.Input.Keys.D) ||
       engine.input.keyboard.wasReleased(ex.Input.Keys.Left)
@@ -206,7 +196,6 @@ export class Player extends Character {
       this.vel.setTo(0, 0);
       this._walkKeyReleased = true;
       this.setDrawing('left_idle');
-      this._needsUpdating = false;
     }
   }
 
