@@ -66,8 +66,10 @@ export class Player extends Character {
     for (let index = 0; index < this._inventory.length; index++) {
       if (this._inventory[index] === item) {
         this._inventory.splice(index, 1);
-        debugger;
-        this._ui.assignPrimaryLocalSprite('excalibur.png');
+        if (this._inventory.length > 0) {
+          this._activeItem = this._inventory[this._inventory.length -1];
+          this._ui.assignPrimaryLocalSprite(this._activeItem.sprite_name);
+        }
       }
     }
   }

@@ -4,6 +4,7 @@ import { Actor, Vector } from 'excalibur';
 
 export abstract class Item extends Actor {
   public shouldDraw: boolean = true;
+  public sprite_name: string;
   public abstract use();
   public abstract drop();
   private _ownedBy: Player;
@@ -24,6 +25,7 @@ export abstract class Item extends Actor {
 
   public assignLocalSprite(itemFile: string) {
     this._texture = new ex.Texture(`./game/assets/items/${itemFile}`);
+    this.sprite_name = itemFile;
     this._texture.load().then(value => {
       this.addDrawing(this._texture.asSprite());
     });
