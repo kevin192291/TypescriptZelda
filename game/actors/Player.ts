@@ -80,6 +80,7 @@ export class Player extends Character {
 
   public setActiveItem(item): Item {
     this._activeItem = item;
+    this._ui.assignPrimaryLocalSprite(this._activeItem.sprite_name);
     return item;
   }
 
@@ -129,6 +130,44 @@ export class Player extends Character {
 
     if (engine.input.keyboard.wasPressed(ex.Input.Keys.Space)) {
       this._activeItem.use();
+      return;
+    }
+    if (engine.input.keyboard.wasPressed(ex.Input.Keys.Num1)) {
+      if (this._inventory[0]) this._activeItem = this._inventory[0];
+      return;
+    }
+    if (engine.input.keyboard.wasPressed(ex.Input.Keys.Num2)) {
+      if (this._inventory[1]) this._activeItem = this._inventory[1];
+      return;
+    }
+    if (engine.input.keyboard.wasPressed(ex.Input.Keys.Num3)) {
+      if (this._inventory[2]) this._activeItem = this._inventory[2];
+      return;
+    }
+    if (engine.input.keyboard.wasPressed(ex.Input.Keys.Num4)) {
+      if (this._inventory[3]) this._activeItem = this._inventory[3];
+      return;
+    }
+    if (engine.input.keyboard.wasPressed(ex.Input.Keys.Num5)) {
+      if (this._inventory[4]) this._activeItem = this._inventory[4];
+      return;
+    }
+    if (engine.input.keyboard.wasPressed(ex.Input.Keys.M)) {
+      let index = this._inventory.findIndex(i => i === this._activeItem);
+      index++;
+      if (this._inventory[index]) {
+        this._activeItem = this._inventory[index];
+        this._ui.assignPrimaryLocalSprite(this._activeItem.sprite_name);
+      }
+      return;
+    }
+    if (engine.input.keyboard.wasPressed(ex.Input.Keys.N)) {
+      let index = this._inventory.findIndex(i => i === this._activeItem);
+      index--;
+      if (this._inventory[index]) {
+        this._activeItem = this._inventory[index];
+        this._ui.assignPrimaryLocalSprite(this._activeItem.sprite_name);
+      }
       return;
     }
 

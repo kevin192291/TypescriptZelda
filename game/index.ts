@@ -16,6 +16,7 @@ import { HealthBar } from './actors/health-bar';
 import { Sword } from './items/sword';
 import { RedPotion } from './items/redPotion';
 import { ButtonsUI } from './actors/buttons-ui';
+import { Bow } from './items/bow';
 
 const game: ex.Engine = new ex.Engine({
   displayMode: ex.DisplayMode.FullScreen
@@ -48,8 +49,10 @@ game.start(loader).then(() => {
   
   const healthPotion = new RedPotion();
   plr.pickUp(healthPotion);
-  
-  plr.setActiveItem(healthPotion);
+
+  const bow = new Bow('bow.png');
+  plr.pickUp(bow);
+  plr.setActiveItem(bow);
   
   eventWatch(store, game, places, plr);
   store.dispatch({type: 'GAME:CHANGE_PLACE', payload: 'castle'});

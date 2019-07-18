@@ -5,6 +5,7 @@ export class RedPotion extends Item {
   constructor() {
     super();
     super.shouldDraw = false;
+    this.sprite_name = 'Red Potion.png';
   }
   public use() {
     const owner = this.getOwner();
