@@ -7,6 +7,13 @@ Cross platform, developed using Electron and Typescript as well as ExcaliburJS.
 - 🆘 Please log as many bugs as possible!
 - 👻 Please share, I would like to get as many people looking as possible so this project doesn't dissapear
 
+## Controls
+Move with: W, A, S, D
+Switch inventory item to the next item using the 'M' key
+Switch inventory item to the previous item using the 'N' key
+Quick select an inventory item with the number keys: 1-5
+The 'Space Bar' will activate your currently selected item
+
 ## Setup
 Setting up is easy:
 ```
