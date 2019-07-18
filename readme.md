@@ -1,4 +1,4 @@
-# ⚔️ communityGame
+# ⚔️ communityGame 🏰
 ![](https://github.com/kevin192291/communityGame/raw/master/documentation/gameDemoGif.gif)
 A game that can be easly modified to be anything anyone wants it to be.
 Cross platform, developed using Electron and Typescript as well as ExcaliburJS.
@@ -7,14 +7,21 @@ Cross platform, developed using Electron and Typescript as well as ExcaliburJS.
 - 🆘 Please log as many bugs as possible!
 - 👻 Please share, I would like to get as many people looking as possible so this project doesn't dissapear
 
-## Controls
-Move with: W, A, S, D
-Switch inventory item to the next item using the 'M' key
-Switch inventory item to the previous item using the 'N' key
-Quick select an inventory item with the number keys: 1-5
-The 'Space Bar' will activate your currently selected item
+## 🕹 Controls
+Move with:
+W(👆),
+A(👈),
+S(👇),
+D(👉)
 
-## Setup
+🎒 Inventory:
+- ➡ Switch inventory item to the next item using the 'M' key
+- ⬅ Switch inventory item to the previous item using the 'N' key
+- ⏱ Quick select an inventory item with the number keys: 1-5
+
+🤺 The 'Space Bar' will activate your currently selected item
+
+## 🏗 Setup
 Setting up is easy:
 ```
 git clone https://github.com/kevin192291/communityGame.git
@@ -23,7 +30,7 @@ npm i
 npm run start
 ```
 
-## 🏰 Making TileMaps
+## 🗺 Making TileMaps
 Making tile maps has been made as easy as I can make it.
 Designing a tile map is done with [Tiled](https://www.mapeditor.org/)
 
@@ -37,7 +44,7 @@ Designing a tile map is done with [Tiled](https://www.mapeditor.org/)
 typically on the right, just under the tile images, click "Embed Tileset".
 - COMPLETE!
 
-### Adding a Warp Zone
+### 🕳 Adding a Warp Zone
 A warp zone is a tile that if entered by the player, it will move the user to a new map.
 an example of this would be if a user steps on a door tile, the user should then be transported
 to the map, that would be inside the house that the door belongs to.

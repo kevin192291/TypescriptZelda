@@ -2,3 +2,4 @@ node_modules
 /dist
 game/*.js
 game/*.map
+readme.md
