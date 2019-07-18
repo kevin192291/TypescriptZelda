@@ -44,7 +44,7 @@ Designing a tile map is done with [Tiled](https://www.mapeditor.org/)
 typically on the right, just under the tile images, click "Embed Tileset".
 - COMPLETE!
 
-### Adding a Warp Zone
+### 🕳 Adding a Warp Zone
 A warp zone is a tile that if entered by the player, it will move the user to a new map.
 an example of this would be if a user steps on a door tile, the user should then be transported
 to the map, that would be inside the house that the door belongs to.
