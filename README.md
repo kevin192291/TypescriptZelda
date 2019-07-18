@@ -15,9 +15,9 @@ S(👇),
 D(👉)
 
 🎒 Inventory:
-- Switch inventory item to the next item using the 'M' key
-- Switch inventory item to the previous item using the 'N' key
-- Quick select an inventory item with the number keys: 1-5
+- ➡ Switch inventory item to the next item using the 'M' key
+- ⬅ Switch inventory item to the previous item using the 'N' key
+- ⏱ Quick select an inventory item with the number keys: 1-5
 
 🤺 The 'Space Bar' will activate your currently selected item
 
