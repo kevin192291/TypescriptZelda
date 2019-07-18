@@ -94,13 +94,13 @@ export function LoadAllMusic(): void {
   });
 }
 
-export function LoadWeather() {
-  debugger;
-  let weatherService = new WeatherService();
-  weatherService.getWeather().then(t => {
-      debugger;
-  });
-}
+// export function LoadWeather() {
+//   debugger;
+//   let weatherService = new WeatherService();
+//   weatherService.getWeather().then(t => {
+//       debugger;
+//   });
+// }
 
 export function parseMapData(resources, game: Engine): Place[] {
   const places: Place[] = [];

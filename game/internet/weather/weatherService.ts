@@ -1,98 +1,102 @@
-import { DataService } from "../dataService";
-import { IWeather } from "../models/weather.interface";
+import { DataService } from '../dataService';
+import { IWeather } from '../models/weather.interface';
 const apiKey: string = 'c92276425f1d8a1128d4dde0ff21fd35';
 
 export class WeatherService extends DataService<IWeather> {
-    weather: IWeather = null;
-    lastPoll: number = null;
+  weather: IWeather = null;
+  lastPoll: number = null;
 
+  constructor() {
+    super(
+      `http://api.openweathermap.org/data/2.5/forecast?id=524901&APPID=${apiKey}`,
+      apiKey
+    );
+    this.setTime();
+    const localWeather: string = localStorage.getItem('weather');
+    try {
+      if (localWeather) {
+        const localWeatherObject: any = JSON.parse(localWeather);
+        this.weather = localWeatherObject.weather;
+        this.lastPoll = localWeatherObject.lastPoll;
+      }
+    } catch (error) {
+      alert(error);
+      localStorage.clear();
+    }
+  }
 
-    constructor() {
-        super(`http://api.openweathermap.org/data/2.5/forecast?id=524901&APPID=${apiKey}`, apiKey);
-        this.setTime();
-        const localWeather: string = localStorage.getItem('weather');
-        try {
-            if (localWeather) {
-                const localWeatherObject: any = JSON.parse(localWeather);
-                this.weather = localWeatherObject.weather;
-                this.lastPoll = localWeatherObject.lastPoll;
-            }
-        } catch (error) {
-            alert(error);
-            localStorage.clear();
-        }
+  async getWeather(endpoint?: string): Promise<IWeather> {
+    if (this.weather !== null && this.lastPoll !== null) {
+      var timeNow = Math.round(new Date().getTime() / 1000);
+      var tomorrow = timeNow + 24 * 3600;
+      if (this.lastPoll > tomorrow) {
+        return this.weather;
+      }
     }
 
-    async getWeather(endpoint?: string): Promise<IWeather> {
-        if (this.weather !== null && this.lastPoll !== null) {
-            var timeNow = Math.round(new Date().getTime() / 1000);
-            var tomorrow = timeNow + (24 * 3600);
-            if (this.lastPoll > tomorrow) {
-                return this.weather;
-            }
-        }
+    return await super.getAll().then((weather: IWeather) => {
+      this.weather = weather;
+      this.lastPoll = Date.now();
+      let weatherObject = {
+        weather: this.weather,
+        lastPoll: this.lastPoll
+      };
+      localStorage.setItem('weather', JSON.stringify(weatherObject));
+      return weather;
+    });
+  }
 
-        return await super.getAll().then((weather: IWeather) => {
-            this.weather = weather;
-            this.lastPoll = Date.now();
-            let weatherObject = {
-                weather: this.weather,
-                lastPoll: this.lastPoll
-            }
-            localStorage.setItem('weather', JSON.stringify(weatherObject));
-            return weather;
-        })
+  private setTime() {
+    var date = new Date();
+    var current_hour = date.getHours();
+    var html = this.getCSSRule('html');
+    //document.styleSheets[0]['rules'][4].style.backgroundColor = 'black';
+    html.style.backgroundColor = 'black';
+
+    if (current_hour < 4) {
+      html.style.opacity = 0.7;
+    }
+    if (current_hour == 4) {
+      html.style.opacity = 0.2;
+    } else if (current_hour == 5) {
+      html.style.opacity = 0.4;
+    } else if (current_hour == 6) {
+      html.style.opacity = 0.6;
+    } else if (current_hour == 7) {
+      html.style.opacity = 1;
     }
 
-    private setTime() {
-        var date = new Date();
-        var current_hour = date.getHours();
-        var html = this.getCSSRule('html');
-        //document.styleSheets[0]['rules'][4].style.backgroundColor = 'black';
-        html.style.backgroundColor = 'black';
-
-        if (current_hour < 4) {
-            html.style.opacity = .7;
-        }
-        if (current_hour == 4) {
-            html.style.opacity = .2;
-        } else if (current_hour == 5) {
-            html.style.opacity = .4;
-        } else if (current_hour == 6) {
-            html.style.opacity = .6;
-        } else if (current_hour == 7) {
-            html.style.opacity = 1;
-        }
-
-        if (current_hour > 18) {
-            html.style.opacity = .7;
-        } else if (current_hour == 19) {
-            html.style.opacity = .6;
-        } else if (current_hour == 20) {
-            html.style.opacity = .5;
-        } else if (current_hour == 21) {
-            html.style.opacity = .4;
-        } else if (current_hour == 22) {
-            html.style.opacity = .3;
-        } else if (current_hour == 23) {
-            html.style.opacity = .2;
-        } else if (current_hour == 24) {
-            html.style.opacity = .1;
-        }
+    if (current_hour > 18) {
+      html.style.opacity = 0.7;
+    } else if (current_hour == 19) {
+      html.style.opacity = 0.6;
+    } else if (current_hour == 20) {
+      html.style.opacity = 0.5;
+    } else if (current_hour == 21) {
+      html.style.opacity = 0.4;
+    } else if (current_hour == 22) {
+      html.style.opacity = 0.3;
+    } else if (current_hour == 23) {
+      html.style.opacity = 0.2;
+    } else if (current_hour == 24) {
+      html.style.opacity = 0.1;
     }
+  }
 
-    private getCSSRule(ruleName) {
-        ruleName = ruleName.toLowerCase();
-        var result = null;
-        var find = Array.prototype.find;
-    
-        find.call(document.styleSheets, styleSheet => {
-            result = find.call(styleSheet.cssRules, cssRule => {
-                return cssRule instanceof CSSStyleRule 
-                    && cssRule.selectorText.toLowerCase() == ruleName;
-            });
-            return result != null;
-        });
-        return result;
-    }
+  private getCSSRule(ruleName) {
+    ruleName = ruleName.toLowerCase();
+    var result = null;
+    var find = Array.prototype.find;
+
+    find.call(document.styleSheets, styleSheet => {
+      result = find.call(styleSheet.cssRules, cssRule => {
+        return (
+          cssRule instanceof CSSStyleRule &&
+          cssRule.selectorText.toLowerCase() == ruleName
+        );
+      });
+      return result != null;
+    });
+    return result;
+  }
 }

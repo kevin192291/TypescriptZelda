@@ -3,7 +3,7 @@ import { Player } from './actors/Player';
 import {
   LoadAllMaps,
   LoadAllSprites,
-  LoadWeather,
+  // LoadWeather,
   resources,
   loader,
   parseMapData,
