@@ -7,7 +7,7 @@ Cross platform, developed using Electron and Typescript as well as ExcaliburJS.
 - 🆘 Please log as many bugs as possible!
 - 👻 Please share, I would like to get as many people looking as possible so this project doesn't dissapear
 
-## Controls
+## 🕹 Controls
 Move with:
 W(👆),
 A(👈),
