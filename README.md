@@ -21,7 +21,7 @@ D(👉)
 
 🤺 The 'Space Bar' will activate your currently selected item
 
-## Setup
+## 🏗 Setup
 Setting up is easy:
 ```
 git clone https://github.com/kevin192291/communityGame.git
