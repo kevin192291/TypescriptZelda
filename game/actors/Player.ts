@@ -120,9 +120,6 @@ export class Player extends Character {
     return this._direction;
   }
 
-  public needsUpdating(update: boolean) {
-  }
-
   public walk(engine) {
     if (engine.input.keyboard.wasPressed(ex.Input.Keys.Q)) {
       engine.isDebug = !engine.isDebug;

@@ -28,19 +28,35 @@ function onTrigger() {
   }
 }
 
-export function eventWatch(store, game: Engine, places: Place[], plr: Actor) {
+export function eventWatch(
+  store,
+  game: Engine,
+  places: Place[],
+  plr: Actor,
+  actors: Actor[]
+) {
   let cachedPlaceName = null;
 
   store.subscribe(() => {
     const currentState: GameState = store.getState().present;
     game.goToScene(currentState.currentPlace);
-    game.currentScene.add(plr);
+
+    actors.forEach(act => {
+      game.currentScene.add(act); // Adds current player to current scene
+      game.currentScene.camera.strategy.lockToActor(act);
+    });
+
+    game.currentScene.add(plr); // Adds current player to current scene
     game.currentScene.camera.strategy.lockToActor(plr);
     // game.currentScene.camera.zoom(3, 500);
 
-    const currentPlace: Place = places.find(p => p.name === currentState.currentPlace);
+    const currentPlace: Place = places.find(
+      p => p.name === currentState.currentPlace
+    );
     placeData = currentPlace;
-    currentPlace.music && currentPlace.music[currentPlace.name] && currentPlace.music[currentPlace.name].play();
+    currentPlace.music &&
+      currentPlace.music[currentPlace.name] &&
+      currentPlace.music[currentPlace.name].play();
     currentPlace.posAtEnter && (plr.pos = currentPlace.posAtEnter);
 
     currentPlace.eventTiles.warpZones.forEach(zone => {
@@ -55,7 +71,7 @@ export function eventWatch(store, game: Engine, places: Place[], plr: Actor) {
         })
       );
     });
-    
+
     for (let key in currentPlace.placeData) {
       if (currentPlace.placeData[key].type === 'warp') {
         const splitKey = key.split(',');
@@ -63,14 +79,17 @@ export function eventWatch(store, game: Engine, places: Place[], plr: Actor) {
           new Trigger({
             width: 16,
             height: 16,
-            pos: new Vector(parseInt(splitKey[0].trim())+8, parseInt(splitKey[1].trim())+8),
+            pos: new Vector(
+              parseInt(splitKey[0].trim()) + 8,
+              parseInt(splitKey[1].trim()) + 8
+            ),
             repeat: -1,
             action: onTrigger,
             target: plr
           })
         );
       }
-    };
+    }
 
     // game.currentScene.camera.zoom(100/currentState.currentPlace.scene.tileMaps[0].cols, 3000);
     // plr.pos = new Vector(parseInt(currentState.currentPlace.placeData.ENTRY_POINT_X), parseInt(currentState.currentPlace.placeData.ENTRY_POINT_Y));

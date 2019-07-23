@@ -17,6 +17,7 @@ import { Sword } from './items/sword';
 import { RedPotion } from './items/redPotion';
 import { ButtonsUI } from './actors/buttons-ui';
 import { Bow } from './items/bow';
+import { Npc } from './actors/Npc';
 
 const game: ex.Engine = new ex.Engine({
   displayMode: ex.DisplayMode.FullScreen
@@ -53,7 +54,11 @@ game.start(loader).then(() => {
   const bow = new Bow('bow.png');
   plr.pickUp(bow);
   plr.setActiveItem(bow);
-  
-  eventWatch(store, game, places, plr);
+
+  const marin = Npc.create(game, resources.spriteSheets['LinkSheet'], 'marin');
+  game.currentScene.add(marin);
+  marin.pos = new ex.Vector(120, 200);
+
+  eventWatch(store, game, places, plr, [marin]);
   store.dispatch({type: 'GAME:CHANGE_PLACE', payload: 'castle'});
 });
