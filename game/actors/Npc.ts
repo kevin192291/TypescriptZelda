@@ -27,7 +27,7 @@ export class Npc extends Character {
       16 //Cell Width
     );
     // create animation (125ms frame speed)
-    var playerIdleAnimation = this._spriteSheet.getAnimationForAll(this._game, 124);
+    var playerIdleAnimation = this._spriteSheet.getSprite(1);
     // add drawing to player as "idle"
     this.addDrawing('idle', playerIdleAnimation);
     // add player to game
@@ -69,26 +69,22 @@ export class Npc extends Character {
   findPreCollision(e: Actor) {
     if (e.pos.x > e.oldPos.x) {
       this.vel.setTo(0, 0);
-      (e as any)._walkKeyReleased = true;
       this.setDrawing('left_idle');
       e.pos = new ex.Vector(e.oldPos.x - 5, e.oldPos.y);
     }
     if (e.pos.x < e.oldPos.x) {
       this.vel.setTo(0, 0);
-      (e as any)._walkKeyReleased = true;
       this.setDrawing('left_idle');
       e.pos = new ex.Vector(e.oldPos.x + 5, e.oldPos.y);
     }
 
     if (e.pos.y > e.oldPos.y) {
       this.vel.setTo(0, 0);
-      (e as any)._walkKeyReleased = true;
       this.setDrawing('left_idle');
       e.pos = new ex.Vector(e.oldPos.x, e.oldPos.y - 5);
     }
     if (e.pos.y < e.oldPos.y) {
       this.vel.setTo(0, 0);
-      (e as any)._walkKeyReleased = true;
       this.setDrawing('left_idle');
       e.pos = new ex.Vector(e.oldPos.x, e.oldPos.y + 5);
     }

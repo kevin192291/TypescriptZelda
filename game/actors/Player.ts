@@ -10,7 +10,6 @@ export class Player extends Character {
 
   private _spriteSheet: SpriteSheet = null;
   private _game: Engine = null;
-  private _walkKeyReleased = true;
   private _initComplete = false;
   private _direction: Direction = Direction.Down;
   private _ui: ButtonsUI;
@@ -39,9 +38,7 @@ export class Player extends Character {
 
   public update(engine: Engine, delta) {
     this.walk(engine);
-    // if (this._needsUpdating) {
     super.update(engine, delta);
-    // }
   }
 
   public _initialize(engine: Engine) {
@@ -172,42 +169,30 @@ export class Player extends Character {
       engine.input.keyboard.isHeld(ex.Input.Keys.W) ||
       engine.input.keyboard.isHeld(ex.Input.Keys.Up)
     ) {
-      if (this._walkKeyReleased) {
         this.setDirection(Direction.Up);
-        this._walkKeyReleased = false;
         this.vel.setTo(0, -100);
         this.setDrawing('up');
-      }
     } else if (
       engine.input.keyboard.isHeld(ex.Input.Keys.S) ||
       engine.input.keyboard.isHeld(ex.Input.Keys.Down)
     ) {
-      if (this._walkKeyReleased) {
         this.setDirection(Direction.Down);
-        this._walkKeyReleased = false;
         this.vel.setTo(0, 100);
         this.setDrawing('down');
-      }
     } else if (
       engine.input.keyboard.isHeld(ex.Input.Keys.A) ||
       engine.input.keyboard.isHeld(ex.Input.Keys.Left)
     ) {
-      if (this._walkKeyReleased) {
         this.setDirection(Direction.Left);
-        this._walkKeyReleased = false;
         this.vel.setTo(-100, 0);
         this.setDrawing('left');
-      }
     } else if (
       engine.input.keyboard.isHeld(ex.Input.Keys.D) ||
       engine.input.keyboard.isHeld(ex.Input.Keys.Right)
     ) {
-      if (this._walkKeyReleased) {
         this.setDirection(Direction.Right);
-        this._walkKeyReleased = false;
         this.vel.setTo(100, 0);
         this.setDrawing('right');
-      }
     }
 
     if (
@@ -216,27 +201,23 @@ export class Player extends Character {
     ) {
       this.vel.setTo(0, 0);
       this.setDrawing('up_idle');
-      this._walkKeyReleased = true;
     } else if (
       engine.input.keyboard.wasReleased(ex.Input.Keys.S) ||
       engine.input.keyboard.wasReleased(ex.Input.Keys.Down)
     ) {
       this.vel.setTo(0, 0);
       this.setDrawing('down_idle');
-      this._walkKeyReleased = true;
     } else if (
       engine.input.keyboard.wasReleased(ex.Input.Keys.A) ||
       engine.input.keyboard.wasReleased(ex.Input.Keys.Right)
     ) {
       this.vel.setTo(0, 0);
       this.setDrawing('right_idle');
-      this._walkKeyReleased = true;
     } else if (
       engine.input.keyboard.wasReleased(ex.Input.Keys.D) ||
       engine.input.keyboard.wasReleased(ex.Input.Keys.Left)
     ) {
       this.vel.setTo(0, 0);
-      this._walkKeyReleased = true;
       this.setDrawing('left_idle');
     }
   }
