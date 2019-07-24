@@ -19,12 +19,15 @@ export class Npc extends Character {
     super(engine, name);
     this._game = engine;
 
-    this._spriteSheet = new ex.SpriteSheet(spriteSheetTexture, 1, 1, 16, 16);
-    // create animation (125ms frame speed)
-    var playerIdleAnimation = this._spriteSheet.getAnimationForAll(
-      this._game,
-      125
+    this._spriteSheet = new ex.SpriteSheet(
+      spriteSheetTexture,
+      spriteSheetTexture.width / 16, // columns (x)
+      spriteSheetTexture.height / 16, // rows (y)
+      16, // Cell Height
+      16 //Cell Width
     );
+    // create animation (125ms frame speed)
+    var playerIdleAnimation = this._spriteSheet.getAnimationForAll(this._game, 124);
     // add drawing to player as "idle"
     this.addDrawing('idle', playerIdleAnimation);
     // add player to game
@@ -50,13 +53,17 @@ export class Npc extends Character {
   public walk() {}
 
   public talk(talkingTo: Actor | Npc | Player | Character) {
-      new MessageBox('Hello! Would you like me to heal you to full health?', talkingTo, (talkingTo: Actor | Npc | Player | Character) => {
-          debugger;
-          (talkingTo as Character).health = 100;
-      }, () => {
-          alert('Fine! I am leaving then!');
-          this.kill();
-      });
+    new MessageBox(
+      'Hello! Would you like me to heal you to full health?',
+      talkingTo,
+      (talkingTo: Actor | Npc | Player | Character) => {
+        (talkingTo as Character).health = 100;
+      },
+      () => {
+        alert('Fine! I am leaving then!');
+        this.kill();
+      }
+    );
   }
 
   findPreCollision(e: Actor) {

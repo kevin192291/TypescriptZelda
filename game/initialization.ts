@@ -53,7 +53,7 @@ export function LoadAllSprites(): void {
   const testFolder = './dist/assets/sprites/characters/';
   const fs = require('fs');
   fs.readdirSync(testFolder).forEach((file: string) => {
-    if (file.includes('.gif')) {
+    if (file.includes('.gif') || file.includes('.png')) {
       const resourceName = file
         .split('.')
         .slice(0, -1)
@@ -139,8 +139,8 @@ export function parseMapData(resources, game: Engine): Place[] {
   for (let sheet in resources.sprites) {
     resources.spriteSheets[sheet] = new SpriteSheet(
       resources.sprites[sheet],
-      13,
-      13,
+      resources.sprites[sheet].width / 16,
+      resources.sprites[sheet].height / 16,
       16,
       16
     );

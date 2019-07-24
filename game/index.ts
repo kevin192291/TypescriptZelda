@@ -55,7 +55,7 @@ game.start(loader).then(() => {
   plr.pickUp(bow);
   plr.setActiveItem(bow);
 
-  const marin = Npc.create(game, resources.spriteSheets['LinkSheet'], 'marin');
+  const marin = Npc.create(game, resources.spriteSheets['marin'], 'marin');
   game.currentScene.add(marin);
   marin.pos = new ex.Vector(120, 200);
 

@@ -10,7 +10,6 @@ export class MessageBox extends Actor {
     super();
     if (confirm(message)) {
         if (yesAction) {
-            debugger;
             yesAction.call(this, talkingTo);
         }
     } else {
