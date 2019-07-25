@@ -1,4 +1,3 @@
-import { WeatherService } from './internet/weather/weatherService';
 import ex = require('excalibur');
 import TiledResource = require('@excaliburjs/excalibur-tiled');
 import { IResources } from './models/resources.interface';

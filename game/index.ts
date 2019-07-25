@@ -18,6 +18,7 @@ import { RedPotion } from './items/redPotion';
 import { ButtonsUI } from './actors/buttons-ui';
 import { Bow } from './items/bow';
 import { Npc } from './actors/Npc';
+import { Hammer } from './items/hammer';
 
 const game: ex.Engine = new ex.Engine({
   displayMode: ex.DisplayMode.FullScreen
@@ -33,6 +34,11 @@ LoadAllItemIcons();
 // LoadWeather();
 
 game.start(loader).then(() => {
+  // const mapService = new MapService();
+  // const mapsFromGithub = mapService.getMapByName('overworld1.json');
+  // resources.maps.push(mapsFromGithub);
+  // debugger;
+  
   const places = parseMapData(resources, game); // Load maps and sprites
   const store = configureStore({
     currentPlace: 'castle',
@@ -45,11 +51,13 @@ game.start(loader).then(() => {
   plr.health = 65;
   new HealthBar(plr);
 
-  const sword = new Sword('excalibur.png');
+  const sword = new Sword(game, 'kokiriSword.png');
   plr.pickUp(sword);
   
   const healthPotion = new RedPotion();
   plr.pickUp(healthPotion);
+
+  plr.pickUp(new Hammer(game));
 
   const bow = new Bow('bow.png');
   plr.pickUp(bow);

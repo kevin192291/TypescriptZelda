@@ -1,14 +1,14 @@
 {
   "name": "app",
   "productName": "App",
-  "version": "0.0.0",
+  "version": "0.1.5",
   "description": "",
   "license": "MIT",
   "repository": "user/repo",
   "author": {
     "name": "Kevin Cantrell",
     "email": "kevin903@live.com",
-    "url": "https://github.com/excaliburjs"
+    "url": "https://github.com/kevin192291/communityGame"
   },
   "scripts": {
     "test": "xo",
@@ -36,6 +36,8 @@
     "pako": "^1.0.6",
     "redux": "^4.0.4",
     "redux-undo": "^1.0.0-beta9-9-7",
+    "request": "^2.88.0",
+    "request-promise": "^4.2.4",
     "require": "^2.4.20",
     "typed-rest-client": "^1.5.0",
     "uglify-js": "^3.6.0",

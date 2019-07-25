@@ -34,16 +34,16 @@ export class WeatherService extends DataService<IWeather> {
       }
     }
 
-    return await super.getAll().then((weather: IWeather) => {
-      this.weather = weather;
-      this.lastPoll = Date.now();
-      let weatherObject = {
-        weather: this.weather,
-        lastPoll: this.lastPoll
-      };
-      localStorage.setItem('weather', JSON.stringify(weatherObject));
-      return weather;
-    });
+    // return await super.getAll().then((weather: IWeather) => {
+    //   this.weather = weather;
+    //   this.lastPoll = Date.now();
+    //   let weatherObject = {
+    //     weather: this.weather,
+    //     lastPoll: this.lastPoll
+    //   };
+    //   localStorage.setItem('weather', JSON.stringify(weatherObject));
+    //   return weather;
+    // });
   }
 
   private setTime() {

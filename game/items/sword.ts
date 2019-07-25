@@ -5,8 +5,11 @@ import { CollisionType, CollisionStartEvent, RotationType } from 'excalibur';
 export class Sword extends Item {
   private _inUse: boolean = false;
   private _useageCount: number = 0;
-  constructor(swordName: string, swordPower: number = 15) {
+  private _game: ex.Engine;
+
+  constructor(game: ex.Engine, swordName: string, swordPower: number = 15) {
     super();
+    this._game = game;
     this.assignLocalSprite(swordName);
     this.collisionType = CollisionType.Active;
     this.body.useBoxCollision();
@@ -18,6 +21,34 @@ export class Sword extends Item {
     });
   }
 
+  public dealDamage(amount: number) {
+    const target = { ...this.getWorldPos() };
+    switch (this.getOwner().getDirection()) {
+      case Direction.Up:
+        target.y -= 16;
+        break;
+      case Direction.Down:
+        target.y += 16;
+        break;
+      case Direction.Left:
+        target.x -= 16;
+        break;
+      case Direction.Right:
+        target.x += 16;
+        break;
+    }
+    const cell = this._game.currentScene.tileMaps[0].getCellByPoint(
+      target.x,
+      target.y
+    );
+    if (cell.sprites.length > 1) {
+      cell.removeSprite(cell.sprites[cell.sprites.length]);
+      cell.sprites[1].spriteId = cell.sprites[0].spriteId;
+      cell.sprites[1].spriteSheetKey = cell.sprites[0].spriteSheetKey;
+      cell.solid = false;
+    }
+  }
+
   public draw(ctx: CanvasRenderingContext2D, delta: number) {
     super.draw(ctx, delta); // perform base drawing logic
   }
@@ -26,6 +57,7 @@ export class Sword extends Item {
     if (!this.currentDrawing) return;
     this._inUse = true;
     this._useageCount++;
+    this.dealDamage(1);
     const owner = this.getOwner();
     switch (owner.getDirection()) {
       case Direction.Up:
