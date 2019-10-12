@@ -34,7 +34,7 @@ npm run start
 Making tile maps has been made as easy as I can make it.
 Designing a tile map is done with [Tiled](https://www.mapeditor.org/)
 
-### Creating a new map
+### ✏️ Creating a new map
 - In Tiled, Click "File" -> "New" -> "New Map" (or CTRL+N)
 - Select a fixed file amount Width of 30 and Height of 30 is recommended.
 - IMPORTANT Change the "Save as type" dropdown to "JSON map files (.json)"
