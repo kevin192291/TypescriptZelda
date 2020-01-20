@@ -1,7 +1,7 @@
 import ex = require('excalibur');
 import TiledResource = require('@excaliburjs/excalibur-tiled');
 import { IResources } from './models/resources.interface';
-const admin = require('firebase-admin');
+
 const path = require('path');
 import {
   SpriteSheet,
@@ -11,15 +11,6 @@ import {
 } from 'excalibur';
 import { Place } from './models/place.interface';
 import { EventTiles } from './models/eventTiles.interface';
-
-admin.initializeApp({
-  apiKey: 'AIzaSyAyx0wm5NyLsbuSJ8QlWZ6eFei6pfdE3mc',
-  authDomain: 'communitygame-1febd.firebaseapp.com',
-  databaseURL: 'https://communitygame-1febd.firebaseio.com',
-  projectId: 'communitygame-1febd',
-  storageBucket: '',
-  messagingSenderId: '273246580010'
-});
 
 export const loader: ex.Loader = new ex.Loader();
 export var resources: IResources = {
