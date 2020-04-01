@@ -1,5 +1,5 @@
-# ⚔️ communityGame 🏰
-![](https://github.com/kevin192291/communityGame/raw/master/documentation/gameDemoGif.gif)
+# ⚔️ TypescriptZelda 🏰
+![](https://github.com/kevin192291/typescriptZelda/raw/master/documentation/gameDemoGif.gif)
 A game that can be easly modified to be anything anyone wants it to be.
 Cross platform, developed using Electron and Typescript as well as ExcaliburJS.
 
@@ -24,8 +24,8 @@ D(👉)
 ## 🏗 Setup
 Setting up is easy:
 ```
-git clone https://github.com/kevin192291/communityGame.git
-cd communityGame
+git clone https://github.com/kevin192291/typescriptZelda.git
+cd typescriptZelda
 npm i
 npm run start
 ```
@@ -34,7 +34,7 @@ npm run start
 Making tile maps has been made as easy as I can make it.
 Designing a tile map is done with [Tiled](https://www.mapeditor.org/)
 
-### Creating a new map
+### ✏️ Creating a new map
 - In Tiled, Click "File" -> "New" -> "New Map" (or CTRL+N)
 - Select a fixed file amount Width of 30 and Height of 30 is recommended.
 - IMPORTANT Change the "Save as type" dropdown to "JSON map files (.json)"
