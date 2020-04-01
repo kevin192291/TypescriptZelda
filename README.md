@@ -1,5 +1,5 @@
-# ⚔️ communityGame 🏰
-![](https://github.com/kevin192291/communityGame/raw/master/documentation/gameDemoGif.gif)
+# ⚔️ TypescriptZelda 🏰
+![](https://github.com/kevin192291/typescriptZelda/raw/master/documentation/gameDemoGif.gif)
 A game that can be easly modified to be anything anyone wants it to be.
 Cross platform, developed using Electron and Typescript as well as ExcaliburJS.
 
@@ -24,8 +24,8 @@ D(👉)
 ## 🏗 Setup
 Setting up is easy:
 ```
-git clone https://github.com/kevin192291/communityGame.git
-cd communityGame
+git clone https://github.com/kevin192291/typescriptZelda.git
+cd typescriptZelda
 npm i
 npm run start
 ```
