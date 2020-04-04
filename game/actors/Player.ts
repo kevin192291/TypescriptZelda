@@ -52,7 +52,6 @@ export class Player extends Character {
   public pickUp(item: Item) {
     item.setOwner(this); // set the new owner of this item
     this._inventory.push(item); // add the item to the owner's inventory
-    this._ui.assignPrimaryLocalSprite('Red Potion.png');
     if (item.shouldDraw !== false) { // some items don't need to be drawn
       this.add(item); // add the item to the actor to draw the item on
     }

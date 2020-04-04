@@ -12,14 +12,16 @@ export abstract class Character extends ex.Actor {
 
     constructor(engine: Engine, name?: string) {
         super();
-        this.collisionType = ex.CollisionType.Active;
-        this.body.useBoxCollision();
-
+        this.body.collider.type = ex.CollisionType.Active;
+        
         this.color = ex.Color.Green;
-        this.setHeight(16);
-        this.setWidth(16);
+        // this.setHeight(16);
+        // this.setWidth(16);
+        this.width = 16;
+        this.height = 16;
         this.pos.setTo(200, 250);
         this.name = name;
+        this.body.useBoxCollider(this.width, this.height);
         engine.currentScene.add(this);
         engine.currentScene.camera.rotation = 45;
     }

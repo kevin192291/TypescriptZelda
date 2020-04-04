@@ -12,8 +12,8 @@ export abstract class Item extends Actor {
 
   constructor() {
     super();
-    this.collisionType = ex.CollisionType.Active;
-    this.body.useBoxCollision();
+    this.body.collider.type = ex.CollisionType.Active;
+    this.body.useBoxCollider(16,16);
   }
 
   public setOwner(owner: Player) {

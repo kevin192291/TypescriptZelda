@@ -5,7 +5,7 @@ import { Color, Actor, PostDrawEvent } from 'excalibur';
 export class HealthBar extends Actor {
   private _target: Player | Npc = null;
   constructor(target: Player | Npc) {
-    super(target.x, target.y, target.getWidth());
+    super(target.body.pos.x, target.body.pos.y, target.width);
     this._target = target;
     target.add(this);
     target.on('postdraw', (d: PostDrawEvent) => {

@@ -8,8 +8,8 @@ export class Bow extends Item {
   constructor(bowSpriteName: string, bowPower: number = 10) {
     super();
     this.assignLocalSprite(bowSpriteName);
-    this.collisionType = CollisionType.Active;
-    this.body.useBoxCollision();
+    this.body.collider.type = CollisionType.Active;
+    this.body.useBoxCollider(16,16);
     this.actions.fade(0, 1);
     this.sprite_name = 'bow.png';
 
@@ -37,7 +37,7 @@ export class Bow extends Item {
         this.currentDrawing.flipVertical = false;
         this.anchor.setTo(1, 1);
         this.actions
-          .moveTo(this.getOwner().x, this.getOwner().y - 200, 8)
+          .moveTo(this.getOwner().body.pos.x, this.getOwner().pos.y - 200, 8)
           .asPromise()
           .resolve()
           .then(() => {});
@@ -46,7 +46,7 @@ export class Bow extends Item {
         this.currentDrawing.flipVertical = true;
         this.anchor.setTo(0, 0);
         this.actions
-          .moveTo(this.getOwner().x, this.getOwner().y + 200, 8)
+          .moveTo(this.getOwner().body.pos.x, this.getOwner().pos.y + 200, 8)
           .asPromise()
           .resolve()
           .then(() => {});
@@ -54,14 +54,14 @@ export class Bow extends Item {
       case Direction.Left:
         this.anchor.setTo(1, 1);
         this.actions
-          .moveTo(this.getOwner().x - 200, this.getOwner().y, 8)
+          .moveTo(this.getOwner().body.pos.x - 200, this.getOwner().pos.y, 8)
           .asPromise()
           .resolve()
           .then(() => {});
         break;
       case Direction.Right:
         this.actions
-          .moveTo(this.getOwner().x + 200, this.getOwner().y, 8)
+          .moveTo(this.getOwner().body.pos.x + 200, this.getOwner().pos.y, 8)
           .asPromise()
           .resolve()
           .then(() => {});

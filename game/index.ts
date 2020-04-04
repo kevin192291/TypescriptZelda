@@ -51,7 +51,7 @@ game.start(loader).then(() => {
   plr.health = 65;
   new HealthBar(plr);
 
-  const sword = new Sword(game, 'kokiriSword.png');
+  const sword = new Sword(game, 'excalibur.png');
   plr.pickUp(sword);
   
   const healthPotion = new RedPotion();
@@ -66,7 +66,8 @@ game.start(loader).then(() => {
   const marin = Npc.create(game, resources.spriteSheets['marin'], 'marin');
   game.currentScene.add(marin);
   marin.pos = new ex.Vector(120, 200);
+  new HealthBar(marin);
 
   eventWatch(store, game, places, plr, [marin]);
-  store.dispatch({type: 'GAME:CHANGE_PLACE', payload: 'castle'});
+  store.dispatch({type: 'GAME:CHANGE_PLACE', payload: '0-0'}); // Transform 0-0 to an xy number system
 });

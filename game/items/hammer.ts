@@ -11,8 +11,8 @@ export class Hammer extends Item {
     super();
     this._game = game;
     this.assignLocalSprite('hammer.png');
-    this.collisionType = CollisionType.Active;
-    this.body.useBoxCollision();
+    this.body.collider.type = CollisionType.Active;
+    this.body.useBoxCollider(16,16);
     this.actions.fade(0, 1);
 
     this.on('collisionstart', (hit: CollisionStartEvent) => {

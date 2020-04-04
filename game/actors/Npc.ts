@@ -67,26 +67,26 @@ export class Npc extends Character {
   }
 
   findPreCollision(e: Actor) {
-    if (e.pos.x > e.oldPos.x) {
+    if (e.body.pos.x > e.body.oldPos.x) {
       this.vel.setTo(0, 0);
       this.setDrawing('left_idle');
-      e.pos = new ex.Vector(e.oldPos.x - 5, e.oldPos.y);
+      e.pos = new ex.Vector(e.body.oldPos.x - 5, e.body.oldPos.y);
     }
     if (e.pos.x < e.oldPos.x) {
       this.vel.setTo(0, 0);
       this.setDrawing('left_idle');
-      e.pos = new ex.Vector(e.oldPos.x + 5, e.oldPos.y);
+      e.pos = new ex.Vector(e.body.oldPos.x + 5, e.body.oldPos.y);
     }
 
     if (e.pos.y > e.oldPos.y) {
       this.vel.setTo(0, 0);
       this.setDrawing('left_idle');
-      e.pos = new ex.Vector(e.oldPos.x, e.oldPos.y - 5);
+      e.pos = new ex.Vector(e.body.oldPos.x, e.body.oldPos.y - 5);
     }
     if (e.pos.y < e.oldPos.y) {
       this.vel.setTo(0, 0);
       this.setDrawing('left_idle');
-      e.pos = new ex.Vector(e.oldPos.x, e.oldPos.y + 5);
+      e.pos = new ex.Vector(e.body.oldPos.x, e.body.oldPos.y + 5);
     }
   }
 }
