@@ -1,29 +1,50 @@
 import { Actor, Engine, Trigger, Vector, Logger } from 'excalibur';
 import { GameState } from './game.types';
 import { Place } from '../../models/place.interface';
+import { Player } from '../../actors/Player';
+import { Direction } from '../../models/direction.enum';
 
 let placeData = null;
 
 function onTrigger() {
   // `this` will be the Trigger instance
+  debugger;
   Logger.getInstance().info('Trigger was triggered!');
   const that: Trigger = this;
   let place =
     placeData.placeData[
-      `${that.getWorldPos().x - 8},${that.getWorldPos().y - 8}`
+    `${that.getWorldPos().x - 8},${that.getWorldPos().y - 8}`
     ];
   if (!place) {
     place =
       placeData.placeData[`${that.getWorldPos().x},${that.getWorldPos().y}`];
   }
   if (place) {
-    (window as any).store.dispatch({
-      type: 'GAME:CHANGE_PLACE',
-      payload: place.scene
-    });
-    const actor: Actor = that.target;
-    if (place.entryX && place.entryY) {
-      actor.pos = new Vector(place.entryX + 8, place.entryY + 8);
+    if (place.type === 'edge') { // Split this into a function
+      debugger;
+      const currentState = (window as any).store.getState().present; // get current state to update
+      const payload = currentState.currentPlace.split(','); // put x,y coords of map into an aray
+      switch ((that.target as Player).getDirection()) { // get player direction (type this) to determine how to update the coords of the map
+        case Direction.Down:
+          payload[1]++; // inc the cord of the map
+          break;
+      
+        default:
+          break;
+      }
+      (window as any).store.dispatch({
+        type: 'GAME:CHANGE_PLACE',
+        payload: payload.join() // join the half string half number array into a full string array
+      }); // TODO: Add player location after the warp event occures!!!
+    } else {
+      (window as any).store.dispatch({
+        type: 'GAME:CHANGE_PLACE',
+        payload: place.scene
+      });
+      const actor: Actor = that.target;
+      if (place.entryX && place.entryY) {
+        actor.pos = new Vector(place.entryX + 8, place.entryY + 8);
+      }
     }
   }
 }
@@ -32,7 +53,7 @@ export function eventWatch(
   store,
   game: Engine,
   places: Place[],
-  plr: Actor,
+  plr: Player,
   actors: Actor[]
 ) {
   let cachedPlaceName = null;
@@ -74,6 +95,24 @@ export function eventWatch(
 
     for (let key in currentPlace.placeData) {
       if (currentPlace.placeData[key].type === 'warp') {
+        const splitKey = key.split(',');
+        game.add(
+          new Trigger({
+            width: 16,
+            height: 16,
+            pos: new Vector(
+              parseInt(splitKey[0].trim()) + 8,
+              parseInt(splitKey[1].trim()) + 8
+            ),
+            repeat: -1,
+            action: onTrigger,
+            target: plr
+          })
+        );
+      }
+
+      if (currentPlace.placeData[key].type === 'edge') {
+        debugger;
         const splitKey = key.split(',');
         game.add(
           new Trigger({

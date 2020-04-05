@@ -69,5 +69,5 @@ game.start(loader).then(() => {
   new HealthBar(marin);
 
   eventWatch(store, game, places, plr, [marin]);
-  store.dispatch({type: 'GAME:CHANGE_PLACE', payload: '0-0'}); // Transform 0-0 to an xy number system
+  store.dispatch({type: 'GAME:CHANGE_PLACE', payload: '0,0'}); // Transform 0-0 to an xy number system
 });

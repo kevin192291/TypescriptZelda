@@ -114,7 +114,7 @@ export function parseMapData(resources, game: Engine): Place[] {
     });
     place.placeData = mapData;
     if (mapData['entry_x'] && mapData['entry_y'])
-    place.posAtEnter = new ex.Vector(mapData['entry_x'], mapData['entry_y']);
+      place.posAtEnter = new ex.Vector(mapData['entry_x'], mapData['entry_y']);
     place.scene.addTileMap(tileMap);
     if (resources.music[place.name]) {
       place.music[place.name] = (resources.music[place.name]);
@@ -141,6 +141,7 @@ export function parseMapData(resources, game: Engine): Place[] {
 function setupMapData(layer) {
   const mapData = [];
   if (layer.properties) {
+    addEdgeWarpZone(layer);
     (<any>layer).properties.forEach(prop => {
       const objArr = JSON.parse(prop.value);
       if (objArr) {
@@ -168,6 +169,7 @@ function setupEventTiles(layer, map, tileMap): EventTiles {
     const collision = (<any>tileSet).tiles.find(
       t => t.id === <number>layer.data[i] - 1
     );
+
     if (collision && collision.properties) {
       collision.properties.forEach(property => {
         switch (property.name) {
@@ -175,6 +177,9 @@ function setupEventTiles(layer, map, tileMap): EventTiles {
             tileMap.getCellByIndex(i).solid = property.value;
             break;
           case 'warp':
+            warpZones.push(tileMap.getCellByIndex(i));
+            break;
+          case 'edge':
             warpZones.push(tileMap.getCellByIndex(i));
             break;
           default:
@@ -188,4 +193,23 @@ function setupEventTiles(layer, map, tileMap): EventTiles {
     damageZones: damageZones,
     items: items,
   };
+}
+
+// This code is shit, TODO: Make more efficient
+function addEdgeWarpZone(layer) {
+  let bot_x = 0;
+  layer.data.forEach((cell, index) => {
+
+    // TOP
+    if (index <= layer.width) {
+      layer.properties.push({ value: `[{"${index * 16},0": {"type":"edge"}}]` });
+    }
+
+    // BOTTOM
+    if (index >= ((layer.width * layer.height) - layer.width)) {
+      layer.properties.push({ value: `[{"${bot_x * 16},${layer.height * 16}": {"type":"edge"}}]` });
+      bot_x++;
+    }
+  });
+
 }
