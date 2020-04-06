@@ -5,10 +5,10 @@ import { Player } from '../../actors/Player';
 import { Direction } from '../../models/direction.enum';
 
 let placeData = null;
+let timer = Date.now();
 
 function onTrigger() {
   // `this` will be the Trigger instance
-  debugger;
   Logger.getInstance().info('Trigger was triggered!');
   const that: Trigger = this;
   let place =
@@ -20,15 +20,22 @@ function onTrigger() {
       placeData.placeData[`${that.getWorldPos().x},${that.getWorldPos().y}`];
   }
   if (place) {
+    if (Date.now() < timer + 50) return; // TODO: FIGURE OUT WHY THE TRIGGER HITS TWICE
+    timer = Date.now(); //TODO: This is terrible fig the issue and get rid of this workaround
+
+    const actor: Actor = that.target;
     if (place.type === 'edge') { // Split this into a function
-      debugger;
       const currentState = (window as any).store.getState().present; // get current state to update
       const payload = currentState.currentPlace.split(','); // put x,y coords of map into an aray
       switch ((that.target as Player).getDirection()) { // get player direction (type this) to determine how to update the coords of the map
         case Direction.Down:
           payload[1]++; // inc the cord of the map
+          actor.pos = new Vector(actor.pos.x, 32);
           break;
-      
+        case Direction.Up:
+          payload[1]--; // inc the cord of the map
+          actor.pos = new Vector(actor.pos.x, (40*16)-20);
+          break;
         default:
           break;
       }
@@ -41,7 +48,7 @@ function onTrigger() {
         type: 'GAME:CHANGE_PLACE',
         payload: place.scene
       });
-      const actor: Actor = that.target;
+
       if (place.entryX && place.entryY) {
         actor.pos = new Vector(place.entryX + 8, place.entryY + 8);
       }
@@ -112,7 +119,6 @@ export function eventWatch(
       }
 
       if (currentPlace.placeData[key].type === 'edge') {
-        debugger;
         const splitKey = key.split(',');
         game.add(
           new Trigger({
