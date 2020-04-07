@@ -71,9 +71,9 @@ will be what is used to navigate from one grid section to another.
 
 🔜 Coming soon:
 A CLI to assite with adding:
--Grid Sectiosn
--Items
--NPCs
+- Grid Sectiosn
+- Items
+- NPCs
 
 If you need to test your JSON you can test it [here](https://jsonformatter.curiousconcept.com/)
 Test the map by running the game, It should work succesfully.
