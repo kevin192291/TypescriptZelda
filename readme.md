@@ -65,5 +65,16 @@ Here is an example:
   {"272,192": {"type":"warp", "scene": "overworld2"}}
 ]
 ```
+
+Currently the naming convention for tile maps is ```<number>,<number>.json```. The number grid system
+will be what is used to navigate from one grid section to another.
+
+Coming soon:
+A CLI to assite with adding:
+-Grid Sectiosn
+-Items
+-NPCs
+
+
 If you need to test your JSON you can test it [here](https://jsonformatter.curiousconcept.com/)
 Test the map by running the game, It should work succesfully.

@@ -205,6 +205,12 @@ function addEdgeWarpZone(layer) {
       layer.properties.push({ value: `[{"${index * 16},0": {"type":"edge"}}]` });
     }
 
+    // LEFT
+    if ((index % 20) === 0) {
+      layer.properties.push({ value: `[{"${0},${(index * 16) / 40}": {"type":"edge"}}]` }); // LEFT
+      layer.properties.push({ value: `[{"${40 * 16},${(index * 16) / 40}": {"type":"edge"}}]` }); // RIGHT
+    }
+
     // BOTTOM
     if (index >= ((layer.width * layer.height) - layer.width)) {
       layer.properties.push({ value: `[{"${bot_x * 16},${layer.height * 16}": {"type":"edge"}}]` });

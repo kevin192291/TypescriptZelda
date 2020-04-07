@@ -20,7 +20,7 @@ function onTrigger() {
       placeData.placeData[`${that.getWorldPos().x},${that.getWorldPos().y}`];
   }
   if (place) {
-    if (Date.now() < timer + 50) return; // TODO: FIGURE OUT WHY THE TRIGGER HITS TWICE
+    if (Date.now() < timer + 100) return; // TODO: FIGURE OUT WHY THE TRIGGER HITS TWICE
     timer = Date.now(); //TODO: This is terrible fig the issue and get rid of this workaround
 
     const actor: Actor = that.target;
@@ -33,12 +33,23 @@ function onTrigger() {
           actor.pos = new Vector(actor.pos.x, 32);
           break;
         case Direction.Up:
+          if (payload[1] <= 0) return;
           payload[1]--; // inc the cord of the map
-          actor.pos = new Vector(actor.pos.x, (40*16)-20);
+          actor.pos = new Vector(actor.pos.x, (40 * 16) - 20);
+          break;
+        case Direction.Left:
+          if (payload[0] <= 0) return;
+          payload[0]--; // inc the cord of the map
+          actor.pos = new Vector((40 * 16) - 20, actor.pos.y);
+          break;
+        case Direction.Right:
+          payload[0]++; // inc the cord of the map
+          actor.pos = new Vector(20, actor.pos.y);
           break;
         default:
           break;
       }
+      console.log('about to go to:', payload.join());
       (window as any).store.dispatch({
         type: 'GAME:CHANGE_PLACE',
         payload: payload.join() // join the half string half number array into a full string array
