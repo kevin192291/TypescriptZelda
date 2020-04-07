@@ -41,7 +41,7 @@ game.start(loader).then(() => {
   
   const places = parseMapData(resources, game); // Load maps and sprites
   const store = configureStore({
-    currentPlace: 'castle',
+    currentPlace: '0,0',
     previousPlace: null
   });
   (window as any).store = store;

@@ -20,6 +20,8 @@ function onTrigger() {
       placeData.placeData[`${that.getWorldPos().x},${that.getWorldPos().y}`];
   }
   if (place) {
+    // This little terriblness can be fixed by setting a flag before changing maps
+    // Then un-setting it after getting to the new map
     if (Date.now() < timer + 100) return; // TODO: FIGURE OUT WHY THE TRIGGER HITS TWICE
     timer = Date.now(); //TODO: This is terrible fig the issue and get rid of this workaround
 
