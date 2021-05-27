@@ -17,11 +17,10 @@ export class Player extends Character {
   private _inventory: Item[] = [];
   private _activeItem: Item = null;
 
-  private constructor(game: Engine, ui: ButtonsUI, spriteSheet: SpriteSheet, name?: string) {
+  private constructor(game: Engine, spriteSheet: SpriteSheet, name?: string) {
     super(game, name);
     this._spriteSheet = spriteSheet;
     this._game = game;
-    this._ui = ui;
     game.currentScene.camera.strategy.lockToActor(this);
 
     // this.on('precollision', (e: PreCollisionEvent) => {
@@ -29,9 +28,9 @@ export class Player extends Character {
     // });
   }
 
-  public static create(game: Engine, ui: ButtonsUI, spriteSheet: SpriteSheet, name?: string) {
+  public static create(game: Engine, spriteSheet: SpriteSheet, name?: string) {
     if (this.instance === null) {
-      this.instance = new Player(game, ui, spriteSheet, name);
+      this.instance = new Player(game, spriteSheet, name);
     }
     return this.instance;
   }
@@ -76,7 +75,7 @@ export class Player extends Character {
 
   public setActiveItem(item): Item {
     this._activeItem = item;
-    this._ui.assignPrimaryLocalSprite(this._activeItem.sprite_name);
+    // this._ui.assignPrimaryLocalSprite(this._activeItem.sprite_name);
     return item;
   }
 

@@ -15,10 +15,10 @@ import eventWatch from './states/game/events';
 import { HealthBar } from './actors/health-bar';
 import { Sword } from './items/sword';
 import { RedPotion } from './items/redPotion';
-import { ButtonsUI } from './actors/buttons-ui';
 import { Bow } from './items/bow';
 import { Npc } from './actors/Npc';
 import { Hammer } from './items/hammer';
+import { UI } from './ui/ui';
 
 const game: ex.Engine = new ex.Engine({
   displayMode: ex.DisplayMode.FullScreen
@@ -45,9 +45,14 @@ game.start(loader).then(() => {
     previousPlace: null
   });
   (window as any).store = store;
+
+  const ui = new UI(game);
+  ui.AddButton(() => {
+    alert('clicked')
+  }, 'excalibur.png');
+
   
-  const ui = new ButtonsUI(game);
-  const plr = Player.create(game, ui, resources.spriteSheets['LinkSheet'], 'kevin');
+  const plr = Player.create(game, resources.spriteSheets['LinkSheet'], 'kevin');
   plr.health = 65;
   new HealthBar(plr);
 
@@ -68,6 +73,8 @@ game.start(loader).then(() => {
   marin.pos = new ex.Vector(120, 200);
   new HealthBar(marin);
 
+
+
   eventWatch(store, game, places, plr, [marin]);
-  store.dispatch({type: 'GAME:CHANGE_PLACE', payload: '0,0'}); // Transform 0-0 to an xy number system
+  store.dispatch({type: 'GAME:CHANGE_PLACE', payload: '0,0'}); // Transform 0-0 to an xy number systemexit
 });

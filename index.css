@@ -37,3 +37,51 @@ html {
   height: 100vh;
   width: 100vw;
 }
+
+#hud {
+  position: fixed;
+  width: 100%;
+  height: 40px;
+  background-color: gray;
+  bottom: 0px;
+}
+
+#health {
+  position: absolute;
+    display: flex;
+    width: 135px;
+    height: 16px;
+    left: 149px;
+    top: 9px;
+    z-index: 10;
+}
+
+#health-bar-wrapper {
+  width: 50px;
+  position: relative;
+  height: 7px;
+  border: 2px solid gray;
+  top: 3px;
+  left: 5px;
+}
+
+#health-bar {
+  position: absolute;
+    width: 45px;
+    height: 7px;
+    background-color: lightgreen;
+}
+
+
+
+#controls {
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  top: 0;
+  height: 100%;
+}
+
+#controls > button {
+  padding-right: 10px;
+}
