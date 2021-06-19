@@ -8,6 +8,9 @@ require('electron-debug')();
 // require('electron-reload')(__dirname, {
 //   electron: require('electron-prebuilt')
 // });
+try {
+  require('electron-reloader')(module)
+} catch (_) {}
 
 // prevent window being garbage collected
 let mainWindow;

@@ -49,7 +49,7 @@ game.start(loader).then(() => {
   const ui = new UI(game);
   ui.AddButton(() => {
     alert('clicked')
-  }, 'excalibur.png');
+  }, 'excalibur.png ');
 
   
   const plr = Player.create(game, resources.spriteSheets['LinkSheet'], 'kevin');
