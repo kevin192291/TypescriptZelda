@@ -1,0 +1,32 @@
+version: 2.1
+jobs:
+  build:
+    working_directory: ~/repo
+    docker:
+      - image: electronuserland/builder:wine
+    steps:
+      - checkout
+      - run:
+          name: Update NPM
+          command: "npm install -g npm"
+      - restore_cache:
+          key: dependency-cache-{{ checksum "package.json" }}
+      - run:
+          name: Install Dependencies
+          command: npm install
+      - run:
+          name: Install dpkg and fakeroot
+          command: |
+            apt-get update -y
+            apt-get install -y dpkg fakeroot
+
+      - save_cache:
+          key: dependency-cache-{{ checksum "package.json" }}
+          paths:
+            - ./node_modules
+      - run:
+          name: Generate Builds
+          command: npm run build
+
+      - store_artifacts:
+          path: ~/repo/out/make
