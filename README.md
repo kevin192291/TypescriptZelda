@@ -1,5 +1,5 @@
 # ⚔️ TypescriptZelda 🏰
-![kevin192291](https://github.com/kevin192291/typescriptZelda/raw/master/documentation/gameDemoGif.gif)
+![](https://github.com/kevin192291/typescriptZelda/raw/master/documentation/gameDemoGif.gif)
 A game that can be easly modified to be anything anyone wants it to be.
 Cross platform, developed using Electron and Typescript as well as ExcaliburJS.
 
