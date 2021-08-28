@@ -9,6 +9,9 @@ require('electron-debug')();
 // Fequire('electron-reload')(__dirname, {
 //   electron: require('electron-prebuilt')
 // });
+try {
+  require('electron-reloader')(module)
+} catch (_) {}
 
 // Prevent window being garbage collected
 let mainWindow;
