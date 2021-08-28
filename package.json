@@ -1,14 +1,14 @@
 {
-  "name": "app",
-  "productName": "App",
+  "name": "typescriptzelda",
+  "productName": "TypescriptZelda",
   "version": "0.1.5",
   "description": "",
   "license": "MIT",
-  "repository": "user/repo",
+  "repository": "TypescriptZelda",
   "author": {
     "name": "Kevin Cantrell",
     "email": "kevin903@live.com",
-    "url": "https://github.com/kevin192291/communityGame"
+    "url": "https://github.com/kevin192291/TypescriptZelda"
   },
   "scripts": {
     "test": "xo",
@@ -28,10 +28,12 @@
   "dependencies": {
     "@excaliburjs/excalibur-tiled": "^2.3.1",
     "ajv": "^6.12.6",
+    "date-now": "^1.0.1",
     "electron-debug": "1.0.0",
     "electron-reload": "^1.5.0",
     "excalibur": "^0.24.5",
     "excaliburjs": "^1.0.7",
+    "mamacro": "^0.0.7",
     "pako": "^1.0.11",
     "redux": "^4.0.5",
     "redux-undo": "^1.0.1",
