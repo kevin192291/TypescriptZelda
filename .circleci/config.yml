@@ -29,4 +29,4 @@ jobs:
           command: npm run build
 
       - store_artifacts:
-          path: ~/repo/out/make
+          path: ./dist
