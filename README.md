@@ -1,11 +1,5 @@
 # ⚔️ TypescriptZelda 🏰
-[![kevin192291](https://circleci.com/gh/kevin192291/TypescriptZelda.svg?style=svg)](https://app.circleci.com/pipelines/github/kevin192291/TypescriptZelda)
-
-[![Known Vulnerabilities](https://snyk.io/test/github/kevin192291/TypescriptZelda/badge.svg)](https://snyk.io/test/github/kevin192291/TypescriptZelda)
-
-[![Maintainability](https://api.codeclimate.com/v1/badges/d2a09b644f92d3793adf/maintainability)](https://codeclimate.com/github/kevin192291/TypescriptZelda/maintainability)
-
-[![Test Coverage](https://api.codeclimate.com/v1/badges/d2a09b644f92d3793adf/test_coverage)](https://codeclimate.com/github/kevin192291/TypescriptZelda/test_coverage)
+[![kevin192291](https://circleci.com/gh/kevin192291/TypescriptZelda.svg?style=svg)](https://app.circleci.com/pipelines/github/kevin192291/TypescriptZelda) [![Known Vulnerabilities](https://snyk.io/test/github/kevin192291/TypescriptZelda/badge.svg)](https://snyk.io/test/github/kevin192291/TypescriptZelda) [![Maintainability](https://api.codeclimate.com/v1/badges/d2a09b644f92d3793adf/maintainability)](https://codeclimate.com/github/kevin192291/TypescriptZelda/maintainability) [![Test Coverage](https://api.codeclimate.com/v1/badges/d2a09b644f92d3793adf/test_coverage)](https://codeclimate.com/github/kevin192291/TypescriptZelda/test_coverage)
 
 
 
