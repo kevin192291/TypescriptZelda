@@ -1,6 +1,8 @@
 # ⚔️ TypescriptZelda 🏰
 [![kevin192291](https://circleci.com/gh/kevin192291/TypescriptZelda.svg?style=svg)](https://app.circleci.com/pipelines/github/kevin192291/TypescriptZelda)
 
+[![Known Vulnerabilities](https://snyk.io/test/github/kevin192291/TypescriptZelda/badge.svg)]
+
 
 ![](https://github.com/kevin192291/TypescriptZelda/blob/master/docs/gameDemoGif.gif?raw=true)
 
