@@ -93,6 +93,7 @@ export class Player extends Character {
     }
 
     if (engine.input.keyboard.wasPressed(ex.Input.Keys.Space)) {
+      debugger;
       this._activeItem.use();
       return;
     }

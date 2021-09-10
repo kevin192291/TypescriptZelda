@@ -22,31 +22,7 @@ export class Sword extends Item {
   }
 
   public dealDamage(amount: number) {
-    const target = { ...this.getWorldPos() };
-    switch (this.getOwner().getDirection()) {
-      case Direction.Up:
-        target.y -= 16;
-        break;
-      case Direction.Down:
-        target.y += 16;
-        break;
-      case Direction.Left:
-        target.x -= 16;
-        break;
-      case Direction.Right:
-        target.x += 16;
-        break;
-    }
-    const cell = this._game.currentScene.tileMaps[0].getCellByPoint(
-      target.x,
-      target.y
-    );
-    if (cell.sprites.length > 1) {
-      cell.removeSprite(cell.sprites[cell.sprites.length]);
-      cell.sprites[1].spriteId = cell.sprites[0].spriteId;
-      cell.sprites[1].spriteSheetKey = cell.sprites[0].spriteSheetKey;
-      cell.solid = false;
-    }
+    this.findFacedActor(this._game.currentScene.actors).takeDamage(amount);
   }
 
   public draw(ctx: CanvasRenderingContext2D, delta: number) {

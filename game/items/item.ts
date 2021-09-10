@@ -1,6 +1,7 @@
 import ex = require('excalibur');
 import { Player } from '../actors/Player';
-import { Actor, Vector } from 'excalibur';
+import { Actor, TileSprite, Vector } from 'excalibur';
+import { Direction } from '../models/direction.enum';
 
 export abstract class Item extends Actor {
   public shouldDraw: boolean = true;
@@ -21,6 +22,31 @@ export abstract class Item extends Actor {
   }
   public getOwner(): Player {
     return this._ownedBy;
+  }
+
+  // Return the TileSprite that the actor is facing
+  public findFacedActor(actors: Actor[]): Player {
+    const target = { ...this.getWorldPos() };
+    switch (this.getOwner().getDirection()) {
+      case Direction.Up:
+        target.y -= 16;
+        break;
+      case Direction.Down:
+        target.y += 16;
+        break;
+      case Direction.Left:
+        target.x -= 16;
+        break;
+      case Direction.Right:
+        target.x += 16;
+        break;
+    }
+    actors.forEach((actor: Actor) => {
+      if (actor.body.useBoxCollider(target.x, target.y)) {
+        return actor;
+      }
+    });
+    return null;
   }
 
   public assignLocalSprite(itemFile: string) {

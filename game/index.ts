@@ -59,14 +59,14 @@ game.start(loader).then(() => {
   const sword = new Sword(game, 'excalibur.png');
   plr.pickUp(sword);
   
-  const healthPotion = new RedPotion();
-  plr.pickUp(healthPotion);
+  // const healthPotion = new RedPotion();
+  // plr.pickUp(healthPotion);
 
-  plr.pickUp(new Hammer(game));
+  // plr.pickUp(new Hammer(game));
 
-  const bow = new Bow('bow.png');
-  plr.pickUp(bow);
-  plr.setActiveItem(bow);
+  // const bow = new Bow('bow.png');
+  // plr.pickUp(bow);
+  // plr.setActiveItem(bow);
 
   const marin = Npc.create(game, resources.spriteSheets['marin'], 'marin');
   game.currentScene.add(marin);
