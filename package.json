@@ -50,7 +50,7 @@
     "@types/lodash-es": "^4.17.4",
     "@types/node": "^10.17.52",
     "devtron": "1.4.0",
-    "electron": "^11.2.3",
+    "electron": "^13.6.6",
     "electron-packager": "^12.2.0",
     "electron-prebuilt": "^1.4.13",
     "electron-reloader": "^1.2.1",
