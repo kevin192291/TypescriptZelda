@@ -51,7 +51,7 @@
     "@types/node": "^10.17.52",
     "devtron": "1.4.0",
     "electron": "^11.2.3",
-    "electron-packager": "^12.2.0",
+    "electron-packager": "^16.0.0",
     "electron-prebuilt": "^1.4.13",
     "electron-reloader": "^1.2.1",
     "gulp": "^4.0.2",
